@@ -29,8 +29,6 @@ public class CustomAdapter_angi_danhmuc extends BaseAdapter
     List<Integer> imageId;
     private static LayoutInflater inflater=null;
     MainActivity mn;
-    ArrayList<monan_getset> listMonAn;
-    TestAdapter_angi_monan ta_monan;
 
     int vitri =0;
 
@@ -94,7 +92,7 @@ public class CustomAdapter_angi_danhmuc extends BaseAdapter
             holder.imv_check_a.setColorFilter(context.getResources().getColor(R.color.red1));
         }
 //Xử lí kích vào một dòng trong list
-        rowView.setOnClickListener(new View.OnClickListener()
+        /*rowView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -104,8 +102,8 @@ public class CustomAdapter_angi_danhmuc extends BaseAdapter
                 LinearLayout tab_liner;
                 LinearLayout tab_chinh_angi;
                 // TODO Auto-generated method stub
-                /*Toast.makeText(context, "You Clicked "+result.get(position), Toast.LENGTH_LONG).show();*/
-                /*holderimv_check=(ImageView)v.findViewById(R.id.imv_check);.*/
+                *//*Toast.makeText(context, "You Clicked "+result.get(position), Toast.LENGTH_LONG).show();*//*
+                *//*holderimv_check=(ImageView)v.findViewById(R.id.imv_check);.*//*
 
                 for(int i=0;i<parent.getChildCount();i++)
                 {
@@ -153,18 +151,13 @@ public class CustomAdapter_angi_danhmuc extends BaseAdapter
 
                 angi.tab_danh_muc_angi.setBackgroundResource(R.color.colorWhite);
 
-                getdata.setAngi_danhmuc(position+1);
-                getdata.setAngi_huyen(0);
-
                 angi.flag_danhmuc=true;
 
                 //đỏ lại danh sách nhà hàng theo danh mục
-                getMonAn();
-                LayMonAn();
 
             }
             //hàm lấy ds đói tượng món ăn /nhà hàng
-            public  void  getMonAn()
+         *//*   public  void  getMonAn()
             {
                 listMonAn=new ArrayList<>();
                 ta_monan=new TestAdapter_angi_monan(context);
@@ -175,14 +168,10 @@ public class CustomAdapter_angi_danhmuc extends BaseAdapter
             {
                 CustomAdapter_angi_monan csmonan1 = new CustomAdapter_angi_monan(angi.inflater,mn,listMonAn);
                 angi.lv_angi_nhahang.setAdapter(csmonan1);
-            }
+            }*//*
 
 
-        });
-
-
-
-
+        });*/
         return rowView;
     }
 }

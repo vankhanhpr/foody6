@@ -22,7 +22,7 @@ import java.util.List;
 public class CustomAdapter_City extends BaseAdapter {
     Context context;
     List<city> tinhThanhs;
-    int vitri=0;
+    public static int vitri=0;
     private static LayoutInflater inflater=null;
     public CustomAdapter_City(Select_province mainActivity, List<city> tinhThanhs){
         context=mainActivity;
@@ -71,6 +71,12 @@ public class CustomAdapter_City extends BaseAdapter {
         }
         holder=(Holder) view.getTag();
         holder.tv_lv_select_city.setText(tinhThanhs.get(i).getCity_Name());
+        for(int j=0;j<getCount();j++)
+        {
+            holder.imv_lv_select_city.setVisibility(View.GONE);
+            holder.tv_lv_select_macdinh.setVisibility(View.GONE);
+            holder.tv_lv_select_city.setTextColor(context.getResources().getColor(R.color.black_text));
+        }
         if(i==vitri)
         {
             holder.imv_lv_select_city.setVisibility(View.VISIBLE);

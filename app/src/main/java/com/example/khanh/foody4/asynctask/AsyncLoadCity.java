@@ -21,7 +21,5 @@ public class  AsyncLoadCity extends AsyncTask<Void,Void,List<city>> {
         WebService sv = new WebService();
         return sv.getCity();
     }
-
-
 }
 

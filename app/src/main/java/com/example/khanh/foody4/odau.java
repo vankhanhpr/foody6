@@ -90,10 +90,11 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
     //các biến tĩnh để dễ xử lý ở nhiều class khác nhau
     public static LinearLayout tab_danhmuc,tab_moinhat;
     public  static ListView lv_nhahang_odau;
-    ExpandableListView lv_moinhat_odau_thanhpho;
+    public  static  ExpandableListView lv_moinhat_odau_thanhpho;
     public  static  TextView tv_examp11,textView_odau_thanhpho_hcm,tv_odau_danhmuc;
     //Các cờ cho biết trang thái bật mở của các tab ăn gì ở đâu tỉnh thành
     public  static boolean flag_odau=true,flag_danhmuc=true,flag_thanhpho=true;
+    ExpandableListAdapterODau expandableListAdapterODau;
 
     //Một biến cho chạy viewPager
     int page = 1;//chạy bức ảnh đầu tiên
@@ -118,7 +119,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
     //Phần thân bắt các sự kiện click trên LinearLayout, listview .....
     //gọi các hàm lấy dữ liệu và hàm adapter đổ dữ liệu và list...
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState)
 
     {
         //Khởi tạo các class lấy dữ liệu nhà hàng
@@ -154,8 +155,6 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             public boolean onGroupClick(ExpandableListView parent, View view, int groupPosition, long id) {
                 getdata.setDanhmuc_huyen(groupPosition);
                 textView_odau_thanhpho_hcm.setText(listDistrict.get(groupPosition).getDistrict_Name().toString());
-
-
                 textView_odau_thanhpho_hcm.setTextColor(context.getResources().getColor(R.color.red1));
                 tab_thanh_pho_odau.setBackgroundResource(R.color.colorWhite);
                 tab_chinh_odau.setVisibility(view.VISIBLE);
@@ -165,13 +164,12 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
 
                 flag_thanhpho=true;
 
-
                 getdata.setRes_City(0);
                 getdata.setRes_Disttrict(listDistrict.get(groupPosition).getDistrict_ID());
                 getdata.setRest_Catalory(0);
                 getdata.setRest_Street(0);
-                Toast.makeText(mainActivity,""+ listDistrict.get(groupPosition).getDistrict_ID(), Toast.LENGTH_SHORT).show();
-                //loadRestaurant();
+                Toast.makeText(mainActivity,""+groupPosition, Toast.LENGTH_SHORT).show();
+                loadRestaurant();
 
 
                 return  false;
@@ -208,15 +206,14 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
 
 
                 tv_odau_danhmuc.setText(arr_danhmuc.get(position).toString());
+                tv_odau_danhmuc.setTextColor(context.getResources().getColor(R.color.red1));
 
                 getdata.setRes_City(0);
                 getdata.setRes_Disttrict(0);
-                getdata.setRest_Catalory(1);
+                getdata.setRest_Catalory(position);
+                Toast.makeText(mainActivity, ""+position, Toast.LENGTH_SHORT).show();
                 getdata.setRest_Street(0);
                 loadRestaurant();
-
-                Toast.makeText(mainActivity, ""+getdata.getRes_City()+getdata.getRest_Catalory(), Toast.LENGTH_SHORT).show();
-
 
                 tab_moinhat.setBackgroundResource(R.color.colorWhite);
                 tab_danhmuc.setBackgroundResource(R.color.colorWhite);
@@ -390,9 +387,9 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         AsyncLoadRest asyncLoadRest= new AsyncLoadRest();
         try
         {
-            listRestaurant=asyncLoadRest.execute(getdata.getRes_City(),getdata.getRes_Disttrict(),getdata.getRest_Street(),getdata.getRest_Catalory()).get();
+            listRestaurant=asyncLoadRest.execute(getdata.getRes_City(),getdata.getRes_Disttrict(),getdata.getRest_Catalory(),getdata.getRest_Street()).get();
 
-            //Log.d("khanheprr",listRestaurant.get(0).getPhoto().toString());
+            //Log.d("res",listRestaurant.get(0).getRest_Name().toString());
             if(listRestaurant.size()>0)
             {
                 for(int i=0;i<listRestaurant.size();i++)
@@ -403,18 +400,21 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                     image= asyncLoadImage.execute(listRestaurant.get(i).getPhoto().toString()).get();
                     if(image!=null)
                     {
-                        //byte[] valueDecoded = Base64.decode(image);
-                        listRestaurant.get(i).setPhoto(image.toString());
+                        byte[] valueDecoded = Base64.decode(image);
+                        listRestaurant.get(i).setImage_res(valueDecoded);
                        // Toast.makeText(mainActivity, "khanh"+valueDecoded, Toast.LENGTH_SHORT).show();
                     }
                 }
-                //Log.d("kich thuco",listRestaurant.get(0).getPhoto().toString());
             }
         }
-        catch (InterruptedException e) {
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
+            Log.d("Loi","Loi rui!!!");
         }
-        catch (ExecutionException e) {
+        catch (ExecutionException e)
+        {
+            Log.d("Loi","Loi rui2");
             e.printStackTrace();
         }
         customAdapter_restaurant_where= new CustomAdapter_Restaurant_Where(mainActivity,listRestaurant);
@@ -443,16 +443,23 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             flag_thanhpho=true;
             button_huy.setVisibility(View.GONE);
             mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
-            angi.button_huy_angi.setVisibility(View.GONE);
+           //\ angi.button_huy_angi.setVisibility(View.GONE);
 
-            angi.lv_moinhat_angi_thanhpho.setAdapter(arrayAdapterhuyen);
+            //angi.lv_moinhat_angi_thanhpho.setAdapter(arrayAdapterhuyen);
 
             tab_thanh_pho_odau.setBackgroundResource(R.color.colorWhite);
+
+            getdata.setRes_City(1);
+            getdata.setRes_Disttrict(0);
+            getdata.setRest_Catalory(0);
+            getdata.setRest_Street(0);
+            //loadRestaurant();
+
 
             load_District();
             angi.tv_listview_thanhpho_angi.setText(getdata.getTen_tp());
             angi.tv_listview_angi_thanhpho1.setText(getdata.getTen_tp());
-            angi.lv_moinhat_angi_thanhpho.setAdapter(customAdapter_district);
+            angi.lv_moinhat_angi_thanhpho.setAdapter(expandableListAdapterODau);
 
         }
     }
@@ -487,7 +494,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         {
             e.printStackTrace();
         }
-       ExpandableListAdapterODau expandableListAdapterODau=
+        expandableListAdapterODau=
                new ExpandableListAdapterODau(context,listDistrict,listHashMap);
         expandableListAdapterODau.setChooseStreet(this);
         lv_moinhat_odau_thanhpho.setAdapter(expandableListAdapterODau);

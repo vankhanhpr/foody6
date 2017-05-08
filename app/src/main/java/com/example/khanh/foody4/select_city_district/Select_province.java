@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -68,13 +69,18 @@ public class Select_province extends AppCompatActivity implements AdapterView.On
         //Lấy cơ sở dữ liệu từ service và đổ vào listView
         listCity=new ArrayList<>();
         AsyncLoadCity asyncLoadCity = new AsyncLoadCity();
-        try {
+        try
+        {
             listCity=asyncLoadCity.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        }
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
+        catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        //Log.d("kahnh2",listCity.get(0).getCity_Name().toString());
         customAdapter_city=new CustomAdapter_City(this,listCity);
         listview_province.setAdapter(customAdapter_city);
 
@@ -86,40 +92,44 @@ public class Select_province extends AppCompatActivity implements AdapterView.On
             {
                 ImageView imv_dt;
                 TextView tv_lv_select_macdinh,tv_lv_select_city;
+                CustomAdapter_City.vitri=position;
                 for(int i=1;i<parent.getChildCount();i++)
                 {
                     imv_dt=(ImageView)parent.getChildAt(i).findViewById(R.id.imv_lv_select_city);
                     tv_lv_select_macdinh=(TextView)parent.getChildAt(i).findViewById(R.id.tv_lv_select_macdinh);
                     tv_lv_select_city=(TextView)parent .getChildAt(i).findViewById(R.id.tv_lv_select_city);
-                    tv_lv_select_macdinh.setVisibility(View.GONE);
 
+                    tv_lv_select_macdinh.setVisibility(View.GONE);
                     imv_dt.setVisibility(View.GONE);
-                    if(i==1)
+                    tv_lv_select_city.setTextColor(context.getResources().getColor(R.color.black_text));
+
+                   /* if(i==1)
                     {
                         tv_lv_select_city.setTextColor(context.getResources().getColor(R.color.black_text_list1));
 
-                    }
+                    }*/
                 }
                 imv_dt=(ImageView)view.findViewById(R.id.imv_lv_select_city);
                 tv_lv_select_macdinh=(TextView)view.findViewById(R.id.tv_lv_select_macdinh);
                 tv_lv_select_city=(TextView)view.findViewById(R.id.tv_lv_select_city);
+
                 imv_dt.setVisibility(View.VISIBLE);
-
-
                 tv_lv_select_macdinh.setVisibility(View.VISIBLE);
 
+                tv_lv_select_city.setTextColor(context.getResources().getColor(R.color.black_text_list1));
                 //set lại mã  thành phố
-                getdata.setCity_ID(position);
+                getdata.setCity_ID(listCity.get(position-1).getCity_ID());
                 getdata.setTen_tp(tv_lv_select_city.getText().toString());
+
+
                 tv_lv_select_macdinh.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int x=getdata.getCity_ID();
-                        sendToMain(x,123);//về ở đâu
-                        sendToMain(x,456);//về ăn gì
+                        //int x=getdata.getCity_ID();
+                        sendToMain(getdata.getCity_ID(),123);//về ở đâu
+                        sendToMain(getdata.getCity_ID(),456);//về ăn gì
                     }
                 });
-
             }
         });
         //đóng activity tỉnh thành và chuyển về activity ở đâu hay ăn gì tương ứng với nơi chọn
@@ -139,6 +149,7 @@ public class Select_province extends AppCompatActivity implements AdapterView.On
             public void onClick(View v)
             {
                 int x=getdata.getCity_ID();
+                //Toast.makeText(context, ""+getdata.getCity_ID().toString(), Toast.LENGTH_SHORT).show();
                 sendToMain(x,123);//về ở đâu
                 sendToMain(x,456);//về ăn gì
             }

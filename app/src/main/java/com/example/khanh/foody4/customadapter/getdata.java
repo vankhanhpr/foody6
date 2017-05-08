@@ -17,6 +17,43 @@ public class getdata
     public  static  int rest_Street=1;
     public  static  int rest_Catalory=1;
 
+    public  static  int food_City=1;
+    public  static  int food_Disttrict=1;
+    public  static  int food_Street=1;
+    public  static  int food_Catalory=1;
+
+    public static int getFood_City() {
+        return food_City;
+    }
+
+    public static void setFood_City(int food_City) {
+        getdata.food_City = food_City;
+    }
+
+    public static int getFood_Disttrict() {
+        return food_Disttrict;
+    }
+
+    public static void setFood_Disttrict(int food_Disttrict) {
+        getdata.food_Disttrict = food_Disttrict;
+    }
+
+    public static int getFood_Street() {
+        return food_Street;
+    }
+
+    public static void setFood_Street(int food_Street) {
+        getdata.food_Street = food_Street;
+    }
+
+    public static int getFood_Catalory() {
+        return food_Catalory;
+    }
+
+    public static void setFood_Catalory(int food_Catalory) {
+        getdata.food_Catalory = food_Catalory;
+    }
+
     public static int getRes_City() {
         return res_City;
     }

@@ -12,12 +12,31 @@ public class restaurant
     int district_ID;
     int street_ID;
     String address_Name;
-    int phone;
+    String phone;
     String photo;
     int totalView;
+    float point;
     int where_Type;
     int rest_Type;
     int categor_ID;
+    byte[]image_res;
+
+    public float getPoint()
+    {
+        return point;
+    }
+
+    public void setPoint(float point) {
+        this.point = point;
+    }
+
+    public byte[] getImage_res() {
+        return image_res;
+    }
+
+    public void setImage_res(byte[] image_res) {
+        this.image_res = image_res;
+    }
 
     public int getRes_ID() {
         return res_ID;
@@ -67,11 +86,11 @@ public class restaurant
         this.address_Name = address_Name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

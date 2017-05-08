@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.khanh.foody4.bao.TestAdapter_angi_monan;
 import com.example.khanh.foody4.bao.TestAdapter_restaurant;
-import com.example.khanh.foody4.get_set.monan_getset;
+import com.example.khanh.foody4.get_set.food;
 import com.example.khanh.foody4.get_set.quanan_getset;
 import com.example.khanh.foody4.R;
 
@@ -35,9 +35,9 @@ public class CustomAdapter_angi_monan extends BaseAdapter
     static Activity activity;
     static TestAdapter_restaurant restaurant_controller;
     static TestAdapter_angi_monan food_controller;
-    List<monan_getset> listfood;
+    List<food> listfood;
     //hàm này gọi hàm trộn các đối tượng trong textview(imageView và textView) và đổ vào listview
-    public CustomAdapter_angi_monan(LayoutInflater inflater, Context aContext , List<monan_getset> listfood) {
+    public CustomAdapter_angi_monan(LayoutInflater inflater, Context aContext , List<food> listfood) {
 
         this.context = aContext;
         this.inflater=inflater;
@@ -83,7 +83,7 @@ public class CustomAdapter_angi_monan extends BaseAdapter
 
         ViewHolder holder;
         int x = position*2;
-        final monan_getset food1 = this.listfood.get(x);
+        final food food1 = this.listfood.get(x);
         if (convertView == null) {
             convertView = LayoutInflater.from(this.context).inflate(R.layout.layout_view_angi_nhahang, parent, false);
             holder = new ViewHolder(convertView);
@@ -93,7 +93,7 @@ public class CustomAdapter_angi_monan extends BaseAdapter
         }
         holder.renderData1(food1,convertView);
         if(listfood.size()>x+1) {
-            final monan_getset food2 = this.listfood.get(x+1);
+            final food food2 = this.listfood.get(x+1);
             holder.renderData2(food2,convertView);
         }
         return convertView;
@@ -144,10 +144,10 @@ public class CustomAdapter_angi_monan extends BaseAdapter
 
         //
 
-        public void renderData1(final monan_getset f,  View view) {
+        public void renderData1(final food f,  View view) {
             ln_food1.setVisibility(View.VISIBLE);
-            food_name1.setText(f.getTenmonan());
-            quanan_getset r = restaurant_controller.getNhaHang(f.getManhahang());
+            food_name1.setText(f.getFood_Name());
+            quanan_getset r = restaurant_controller.getNhaHang(f.getRes_ID());
             rest_name1.setText(r.getTenNhaHang());
             tv_address1.setText(r.getDiaChi());
 
@@ -165,14 +165,14 @@ public class CustomAdapter_angi_monan extends BaseAdapter
             ln_info1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickFoodInfo(f.getMamonan());
+                    clickFoodInfo(f.getFood_ID());
                 }
             });
         }
-        public void renderData2(final monan_getset f,  View view) {
+        public void renderData2(final food f,  View view) {
             ln_food2.setVisibility(View.VISIBLE);
-            food_name2.setText(f.getTenmonan());
-            quanan_getset r = restaurant_controller.getNhaHang(f.getManhahang());
+            food_name2.setText(f.getFood_Name());
+            quanan_getset r = restaurant_controller.getNhaHang(f.getRes_ID());
             rest_name2.setText(r.getTenNhaHang());
             tv_address2.setText(r.getDiaChi());
 
@@ -188,7 +188,7 @@ public class CustomAdapter_angi_monan extends BaseAdapter
                 @Override
                 public void onClick(View v)
                 {
-                    clickFoodInfo(f.getMamonan());
+                    clickFoodInfo(f.getFood_ID());
                 }
             });
         }

@@ -17,8 +17,11 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.khanh.foody4.asynctask.AsyncLoadDistrict;
+import com.example.khanh.foody4.asynctask.AsyncLoadFood;
+import com.example.khanh.foody4.asynctask.AsyncLoadImage;
 import com.example.khanh.foody4.asynctask.AsyncLoadStreet;
 import com.example.khanh.foody4.bao.TestAdapter_angi_monan;
 import com.example.khanh.foody4.bao.TestAdapter_district;
@@ -26,12 +29,15 @@ import com.example.khanh.foody4.customadapter.CustomAdapter_District;
 import com.example.khanh.foody4.customadapter.ExpandableListAdapterODau;
 import com.example.khanh.foody4.get_set.connect_database_district;
 import com.example.khanh.foody4.get_set.district;
+import com.example.khanh.foody4.get_set.food;
 import com.example.khanh.foody4.get_set.monan_getset;
 import com.example.khanh.foody4.customadapter.CustomAdapter_angi_monan;
 import com.example.khanh.foody4.customadapter.getdata;
 import com.example.khanh.foody4.get_set.street;
 import com.example.khanh.foody4.myinterface.IChooseStreet;
 import com.example.khanh.foody4.select_city_district.Select_province;
+
+import org.kobjects.base64.Base64;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,8 +81,10 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
 
 
     List<district> listDistrict;
+    List<food> listFood;
     List<street> listStreet;
     HashMap<district,List<street>>listHashMap;
+    ExpandableListAdapterODau expandableListAdapterODau;
     //CustomAdapter_District customAdapter_district;
 
     public angi(MainActivity mainActivity)
@@ -90,7 +98,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
     /*hàm này sẽ chứa các hàm bắt sự kiện trên các tab mới nhất danh mục tỉnh thành
     * nó gọi các hàm lấy dữ liệu đổ dữ liệu vào trong listview */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState)
     {
 
@@ -101,10 +109,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         unit(v);//gọi hàm khởi tạo các giá trị
         setItem1(v);//Gọi hàm setItem
         load_District();
-        //getMonAn();
-       // LayMonAn();
-
-
+        load_Food();
         //bắt sự kiện khi nhấn vào nút mới nhất nó sẽ đóng tab chính và mở tav listview mới nhất
         tab_new.setOnClickListener(this);
         //bắt sự kiện khi nhấn vào nút danh mục nó sẽ đóng tab chính và mở tav listview danh mục
@@ -132,6 +137,14 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
                 mainActivity.tab_button_nagi.setVisibility(view.VISIBLE);
                 tv_listview_angi_thanhpho1.setTextColor(context.getResources().getColor(R.color.red1));
                 flag_thanhpho=true;
+
+                getdata.setFood_City(0);
+                getdata.setFood_Disttrict(listDistrict.get(groupPosition).getDistrict_ID());
+                getdata.setFood_Street(0);
+                getdata.setFood_Catalory(0);
+                load_Food();
+
+
                 return  false;
             }
         });
@@ -145,8 +158,31 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
             }
         });
 
+        //set sự kiện khi click vào listview danh mục
+        lv_danhmuc.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {;
+                button_huy_angi.setVisibility(View.GONE);
 
+                tab_danh_muc_angi.setBackgroundResource(R.color.colorWhite);
+                tab_listview_angi_danhmuc.setVisibility(view.GONE);
+                tab_chinh1.setVisibility(view.VISIBLE);
+                button_huy_angi.setVisibility(view.GONE);
+                tv_angi_danhmuc.setText(arr_danhmuc.get(position).toString());
+                tv_angi_danhmuc.setTextColor(context.getResources().getColor(R.color.red1));
 
+                tab_danh_muc_angi.setBackgroundResource(R.color.colorWhite);
+                flag_danhmuc=true;
+
+                getdata.setFood_City(0);
+                getdata.setFood_Disttrict(0);
+                getdata.setFood_Street(0);
+                getdata.setFood_Catalory(position);
+                Toast.makeText(mainActivity, ""+position, Toast.LENGTH_SHORT).show();
+                load_Food();
+
+            }
+        });
 
         /*Chọn tỉnh or thành phố khác mở activity tỉnh thành để chọn lại tương ứng*/
         tab_select_province_angi.setOnClickListener(this);
@@ -290,18 +326,12 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
                 flag_thanhpho=true;
                 getdata.setAngi_danhmuc(-1);
                 getdata.setAngi_huyen(0);
-                getMonAn();
-                LayMonAn();
                 break;
         }
     }
 
-
-
     public void unit(View v)
-    {//Hàm này khởi tạo tất cả các giá trị Listview,Linerlayout.....
-
-        //Khởi tạo các listView ,button, list .....
+    {
         arr_moinhat1=new ArrayList<>();
         image_moinhat1=new ArrayList<>();
         arr_danhmuc=new ArrayList<>();
@@ -348,6 +378,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
 
 
         listDistrict= new ArrayList<>();
+        listFood= new ArrayList<>();
 
 
         //load lại danh sách món ăn nhà hàng khi chọn tỉnh thành bên tab ở đâu
@@ -361,8 +392,6 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //load lại danh sách món ăn nhà hàng khi chọn tỉnh thành bên tab ở đâu
-                getMonAn();
-                LayMonAn();
             }
 
             @Override
@@ -387,12 +416,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
 
             tv_listview_thanhpho_angi.setText(getdata.getTen_tp());
             tv_listview_angi_thanhpho1.setText(getdata.getTen_tp());
-            //getListdt();
-            //setItem_thanhpho();
-
             load_District();
-
-
             odau.button_huy.setVisibility(View.GONE);
             mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
             button_huy_angi.setVisibility(View.GONE);
@@ -402,16 +426,17 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
             tab_listview_angi_thanhpho.setVisibility(View.GONE);
             tab_chinh1.setVisibility(View.VISIBLE);
             flag_thanhpho=true;
-            getdata.setAngi_danhmuc(-1);
-            getdata.setAngi_huyen(0);
-            getdata.setAngi_tinh(kq);
-            getdata.setDanhmuc_tinh(kq);
-            getMonAn();
-            LayMonAn();
+
             //set danh sách quận huyên tương ứng bên tab ở đâu
             odau.tv_examp11.setText(getdata.getTen_tp());
             odau.textView_odau_thanhpho_hcm.setText(getdata.getTen_tp());
-            //odau.lv_moinhat_odau_thanhpho.setAdapter(customAdapter_district);
+            odau.lv_moinhat_odau_thanhpho.setAdapter(expandableListAdapterODau);
+
+            getdata.setFood_City(getdata.getCity_ID());
+            getdata.setFood_Disttrict(0);
+            getdata.setFood_Street(0);
+            getdata.setFood_Catalory(0);
+            load_Food();
         }
     }
     //Hàm load danh sách quận huyện
@@ -442,13 +467,44 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         catch (ExecutionException e) {
             e.printStackTrace();
         }
-        ExpandableListAdapterODau expandableListAdapterODau=
+        expandableListAdapterODau=
                 new ExpandableListAdapterODau(context,listDistrict,listHashMap);
         expandableListAdapterODau.setChooseStreet(this);
         lv_moinhat_angi_thanhpho.setAdapter(expandableListAdapterODau);
     }
 
-
+    public  void load_Food()
+    {
+        AsyncLoadFood asyncLoadFood = new AsyncLoadFood();
+        try
+        {
+            listFood= asyncLoadFood.execute(getdata.getFood_City(),getdata.getFood_Disttrict(),getdata.getFood_Catalory(),getdata.getFood_Street()).get();
+            if(listFood.size()>0)
+            {
+                for(int i=0;i<listFood.size();i++)
+                {
+                    String image="";
+                    AsyncLoadImage asyncLoadImage = new AsyncLoadImage();
+                    //Log.d("khanh5",listRestaurant.get(0).getPhoto().toString());
+                    image= asyncLoadImage.execute(listFood.get(i).getPicture().toString()).get();
+                    if(image!=null)
+                    {
+                        byte[] valueDecoded = Base64.decode(image);
+                        listFood.get(i).setAnh(valueDecoded);
+                        // Toast.makeText(mainActivity, "khanh"+valueDecoded, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        CustomAdapter_angi_monan customAdapter_angi_monan= new CustomAdapter_angi_monan(inflater,context,listFood);
+        lv_angi_nhahang.setAdapter(customAdapter_angi_monan);
+    }
     //Hàm sẽ tạo danh sách các danh mục theo mới nhất và danh mục
     //Gọi hàm adapter để trả về list tương ứng
     public void setItem1(View v)
@@ -542,7 +598,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
     }
 
     //Hàm lấy món ăn và đổ vào list các món ăn
-    public  void  getMonAn()
+   /* public  void  getMonAn()
     {
         listMonAn=new ArrayList<>();
         ta_monan=new TestAdapter_angi_monan(context);
@@ -553,7 +609,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
     {
             CustomAdapter_angi_monan csmonan = new CustomAdapter_angi_monan(inflater, mainActivity, listMonAn);
             lv_angi_nhahang.setAdapter(csmonan);
-    }
+    }*/
 
     @Override
     public void onExpand(int groupPosition)

@@ -170,13 +170,15 @@ public class CustomAdapter_Restaurant_Where extends BaseAdapter
         {
             tv_tennhahang.setText(restaurant.getRest_Name());
             tv_diachi.setText(restaurant.getAddress_Name());
-
+            float s= restaurant.getPoint();
+            tv_diem.setText(""+restaurant.getPoint());
             if (restaurant.getPhoto()!= null)
             {
 
-                byte[] valueDecoded = Base64.decode(restaurant.getPhoto().toString().trim());
+                //byte[] valueDecoded = Base64.decode(restaurant.getPhoto().toString().trim());
                 //
-                Glide.with(context).load(valueDecoded).into(home_imageview_album);
+                //Log.d("khanh2",valueDecoded.toString());
+               Glide.with(context).load(restaurant.getImage_res()).into(home_imageview_album);
                 //Log.d("lan 2",restaurant.getPhoto().toString());
                // Glide.with(context).load(restaurant.getPhoto().toString()).into(home_imageview_album);
             }
