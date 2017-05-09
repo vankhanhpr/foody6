@@ -24,8 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".select_city_district.Select_province"/>
-        <activity android:name=".mainf" />
-
+        <activity android:name=".mainf"/>
+        <activity android:name=".login.Login" />
+        <activity android:name=".login.Edit_Profile" />
     </application>
 
 </manifest>

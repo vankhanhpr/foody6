@@ -1,21 +1,18 @@
 package com.example.khanh.foody4.webservice;
 
-import android.util.Log;
-
 import com.example.khanh.foody4.get_set.city;
 import com.example.khanh.foody4.get_set.district;
 import com.example.khanh.foody4.get_set.food;
 import com.example.khanh.foody4.get_set.restaurant;
 import com.example.khanh.foody4.get_set.street;
+import com.example.khanh.foody4.get_set.user_member;
 import com.example.khanh.foody4.staticobject.StaticObject;
 
 import org.ksoap2.SoapEnvelope;
-import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.MarshalFloat;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -304,5 +301,136 @@ public class WebService {
 
         return listFood;
 
+    }
+
+    //Hàm kiểm tra đăng nhập
+    public  int setLogin(String email,String password)
+    {
+        int temp=-1;
+        SoapObject request = new SoapObject(StaticObject.NAME_SPACE, StaticObject.METHOD_CHECKLOGIN);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("email", email);
+        request.addProperty("pass",password);
+
+        envelope.setOutputSoapObject(request);
+
+        MarshalFloat marshalFloat = new MarshalFloat();
+        marshalFloat.register(envelope);
+
+        HttpTransportSE HttpsTransport = new HttpTransportSE(StaticObject.URL);
+
+        try {
+            HttpsTransport.call(StaticObject.SOAP_ACTION_CHECKLOGIN,envelope);
+            SoapPrimitive item = (SoapPrimitive) envelope.getResponse();
+            String s= item.toString();
+            temp= Integer.parseInt(s);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+        return temp;
+    }
+    //Hàm lấy thông tin tài khoản
+    public user_member getUser(String email)
+    {
+        user_member user=null;
+        SoapObject request = new SoapObject(StaticObject.NAME_SPACE, StaticObject.METHOD_GETUSER);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("email",email);
+
+        envelope.setOutputSoapObject(request);
+
+        MarshalFloat marshalFloat = new MarshalFloat();
+        marshalFloat.register(envelope);
+
+        HttpTransportSE HttpsTransport = new HttpTransportSE(StaticObject.URL);
+        try {
+            HttpsTransport.call(StaticObject.SOAP_ACTION_GETUSER,envelope);
+            SoapObject arraySoapObject = (SoapObject) envelope.bodyIn;
+            SoapObject item;
+
+
+
+                user= new user_member();
+
+                item = (SoapObject) arraySoapObject.getProperty(0);
+
+                String user_ID = item.getProperty("User_Menber_ID").toString();
+                String pass = item.getProperty("User_Password").toString();
+                String userName = item.getProperty("User_Member_Name").toString();
+                String age = item.getProperty("User_Member_Age").toString();
+                String avatar = item.getProperty("User_Menber_Avatar").toString();
+                String mail = item.getProperty("User_Mail").toString();
+                String familyName = item.getProperty("User_FamilyName").toString();
+                String userSex = item.getProperty("User_Sex").toString();
+                String maria = item.getProperty("User_Marital").toString();
+
+
+                user.setUser_ID(user_ID);
+                user.setPassword(pass);
+                user.setUser_Name(userName);
+                user.setUser_Age(Integer.parseInt(age));
+                user.setUser_Picture(avatar);
+                user.setUser_Mail(mail);
+                user.setUser_FamilyName(familyName);
+                user.setUser_Sex(userSex);
+                user.setUse_Mari(maria);
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        return  user;
+    }
+
+    //Thay đổi thông tin tài khoản
+    public boolean changeProfile(String email,String userID,String name,String familyName,String maria,String sex)
+    {
+        boolean resuft=false;
+        SoapObject request = new SoapObject(StaticObject.NAME_SPACE, StaticObject.METHOD_CHANGEUSER);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("email", email);
+        request.addProperty("userID", userID);
+        request.addProperty("name", name);
+        request.addProperty("familyName", familyName);
+        request.addProperty("maria", maria);
+        request.addProperty("sex", sex);
+
+
+
+        envelope.setOutputSoapObject(request);
+
+        MarshalFloat marshalFloat = new MarshalFloat();
+        marshalFloat.register(envelope);
+
+        HttpTransportSE HttpsTransport = new HttpTransportSE(StaticObject.URL);
+
+        try {
+
+            HttpsTransport.call(StaticObject.SOAP_ACTION_CHANGEUSER, envelope);
+
+            SoapPrimitive item = (SoapPrimitive) envelope.getResponse();
+            String kq=item.toString();
+            resuft = Boolean.parseBoolean(kq);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return resuft;
     }
 }

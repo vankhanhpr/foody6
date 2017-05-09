@@ -57,6 +57,15 @@ import java.util.concurrent.ExecutionException;
 
 public class odau extends Fragment implements View.OnClickListener,IChooseStreet
 {
+   /* angi Angi;
+
+    public angi getAngi() {
+        return Angi;
+    }
+
+    public void setAngi(angi angi) {
+        Angi = angi;
+    }*/
 
     //Phần khai báo các đối tượng
     List<String >arr_moinhat,arr_danhmuc,arr_district,arr_tennhahang,arr_diachi;

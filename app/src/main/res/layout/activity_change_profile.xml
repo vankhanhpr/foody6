@@ -1,0 +1,486 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffeeeeee"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/choose_provine_top_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:background="#ffcc0000"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:id="@+id/imv_select_back_profile"
+            android:layout_width="50.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/list_view_login2"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:padding="10.0dip"
+                android:src="@drawable/back" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_view_user_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/tv_save"
+            android:layout_toRightOf="@+id/imv_select_back_profile"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:text="hoten"
+            android:gravity="center_vertical"
+            android:textColor="#ffffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/list_view_login2"
+            android:clickable="true"
+            android:gravity="center|right"
+            android:paddingLeft="15.0dip"
+            android:paddingRight="15.0dip"
+            android:text="LƯU LẠI"
+            android:textColor="#ffffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#ffffffff"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dip"
+                    android:background="#ffeeeeee" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150.0dip"
+                            android:text="Tên đăng nhập"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:id="@+id/edit_text_login_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:minHeight="32.0dip"
+                            android:padding="3.0dip"
+                            android:singleLine="true"
+                            android:enabled="false"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.100000024px"
+                        android:background="@color/listgray" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150.0dip"
+                            android:text="Tên"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:id="@+id/edit_text_last_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:maxLines="1"
+                            android:minHeight="32.0dip"
+                            android:padding="3.0dip"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.100000024px"
+                        android:background="@color/listgray" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150.0dip"
+                            android:text="Họ"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:id="@+id/edit_text_first_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:maxLines="1"
+                            android:minHeight="32.0dip"
+                            android:padding="3.0dip"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.100000024px"
+                        android:background="#ffeeeeee" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150dip"
+                            android:text="Email"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:id="@+id/edit_text_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:enabled="false"
+                            android:minHeight="32.0dip"
+                            android:padding="4.0dip"
+                            android:textColor="@color/login"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dip"
+                    android:background="#ffeeeeee" />
+
+                <RelativeLayout
+                    android:id="@+id/relative_layout_manage_phone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:gravity="left"
+                    android:minHeight="15dip"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dip"
+                    >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Quản lý số điện thoại"
+                        android:textColor="@color/info" />
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="25.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="3.0dip"
+                        android:layout_weight="1.0"
+                        app:srcCompat="@drawable/icon_arrow_right" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dip"
+                    android:background="#ffeeeeee" />
+
+                <RelativeLayout
+                    android:id="@+id/relative_layout_manage_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:gravity="left"
+                    android:minHeight="15dip"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dip">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Quản lý địa chỉ"
+                        android:textColor="@color/info" />
+
+                    <ImageView
+                        android:layout_width="30.0dip"
+                        android:layout_height="25.0dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="3.0dip"
+                        android:layout_weight="1.0"
+                        app:srcCompat="@drawable/icon_arrow_right" />
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150dip"
+                            android:text="fsdfasfsd"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:padding="4.0dip"
+                            android:text="dsfdsfdsa"
+                            android:textColor="@color/login"
+                            android:textSize="13dip" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:padding="4.0dip"
+                            android:text="fadsfdsf"
+                            android:textColor="@color/login"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.100000024px"
+                        android:background="@color/black_icon" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150dip"
+                            android:text="dsafdasfdsafsd"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:padding="3.0dip"
+                            android:singleLine="true"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.100000024px"
+                        android:background="@color/black_icon" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dip"
+                    android:background="#ffeeeeee" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150dip"
+                            android:text="Ngày tham gia"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:id="@+id/edit_text_date_join"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:editable="false"
+                            android:minHeight="32.0dip"
+                            android:padding="3.0dip"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.100000024px"
+                        android:background="#ffeeeeee" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150dip"
+                            android:text="Hôn nhân"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:id="@+id/edit_text_marry_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:clickable="true"
+                            android:editable="true"
+                            android:minHeight="32.0dip"
+                            android:padding="3.0dip"
+                            android:textSize="13dip" />
+
+                        <EditText
+                            android:id="@+id/edit_text_sex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/border_edittext"
+                            android:editable="true"
+                            android:minHeight="32.0dip"
+                            android:padding="3.0dip"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.100000024px"
+                        android:background="#ffeeeeee" />
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_date_of_birth"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3.0dip">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="150dip"
+                            android:text="Ngày sinh"
+                            android:textColor="@color/black_icon"
+                            android:textSize="13dip" />
+
+                        <TextView
+                            android:id="@+id/text_view_date_of_birth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.91"
+                            android:padding="3.0dip"
+                            android:textSize="13dip" />
+                        <ImageView
+                            android:layout_width="30.0dip"
+                            android:layout_height="25.0dip"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="3.0dip"
+                            android:layout_weight="0.08"
+                            app:srcCompat="@drawable/icon_arrow_right" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+
+</LinearLayout>

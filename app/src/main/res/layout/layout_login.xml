@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_background_login"
+        android:scaleType="centerCrop"/>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/tab_imv_login_email"
+            android:layout_width="50.0dip"
+            android:layout_height="fill_parent"
+            android:background="@drawable/list_view_login"
+            android:clickable="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:padding="5.0dip"
+                app:srcCompat="@drawable/back" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Đăng nhập với Email"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50.0dip"
+        android:layout_marginRight="50.0dip"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_text_username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:gravity="bottom"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="10.0dip"
+            android:textColor="#ffffffff"
+            android:textColorHint="#ffcccccc"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:gravity="bottom"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:padding="10.0dip"
+            android:textColor="#ffffffff"
+            android:textColorHint="#ffcccccc"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/text_view_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip"
+            android:background="@drawable/list_view_border"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="10.0dip"
+            android:text="Đăng nhập"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/text_view_forgot_pass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip"
+            android:background="@drawable/list_view_login2"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="5.0dip"
+            android:text="Quên mật khẩu"
+            android:textColor="#ffffffff"
+            android:textSize="10dip"
+            />
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/text_view_register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/list_view_login2"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="10.0dip"
+        android:textColor="#ffffffff"
+        android:textSize="14sp" />
+
+</RelativeLayout>

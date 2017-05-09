@@ -49,6 +49,18 @@ import java.util.concurrent.ExecutionException;
 
 public class angi extends Fragment implements View.OnClickListener,IChooseStreet
 {
+
+    /*odau odau;
+
+    public odau getODau() {
+        return odau;
+    }
+
+    public void setODau(odau odau) {
+        this.odau = odau;
+    }*/
+
+
     public  static  LinearLayout tab_new,tab_listview1,tab_listview_angi_danhmuc,tab_danh_muc_angi,tab_listview_angi_thanhpho,tab_thanh_pho_angi1;
     LinearLayout tab_chinh1,tab_select_province_angi;//thanh cuộn phần danh mục
     Timer timer;

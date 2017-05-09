@@ -7,7 +7,7 @@ package com.example.khanh.foody4.staticobject;
 public class StaticObject
 {
     public static String NAME_SPACE="http://vankhanhpr.org/";
-    public static String URL="http://10.0.3.2/Public/WebService3.asmx?WSDL";
+    public static String URL="http://10.0.3.2/Public1/WebService3.asmx?WSDL";
     //
     public static String METHOD_GETALLTINHTHANH="getCity";
     public static String METHOD_GETIMAGE="getImage";
@@ -15,6 +15,9 @@ public class StaticObject
     public static String METHOD_GETSTREET="getStreet";
     public  static String MERTHOD_GETRESTAURANT="getRestaurant";
     public  static String METHOD_GETFOOD="getFood";
+    public  static  String METHOD_CHECKLOGIN="ktDangNhap";
+    public  static  String METHOD_GETUSER="getUser";
+    public  static  String METHOD_CHANGEUSER="changeProfile";
 
 
     public static String SOAP_ACTION_GETALLTINHTHANH  = NAME_SPACE+METHOD_GETALLTINHTHANH;
@@ -29,4 +32,9 @@ public class StaticObject
 
     public  static String SOAP_ACTION_GETFOOD=NAME_SPACE+METHOD_GETFOOD;
 
+    public  static  String SOAP_ACTION_CHECKLOGIN=NAME_SPACE+METHOD_CHECKLOGIN;
+
+    public  static  String SOAP_ACTION_GETUSER=NAME_SPACE+METHOD_GETUSER;
+
+    public  static  String SOAP_ACTION_CHANGEUSER=NAME_SPACE+METHOD_CHANGEUSER;
 }

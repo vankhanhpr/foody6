@@ -17,7 +17,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter
     {
         super(gf);
         odau=new odau(mainActivity);
+
         angi=new angi(mainActivity);
+        /*
+        odau.setAngi(angi);
+        angi.setODau(odau);*/
     }
 
     //Hàm này chọn bên trái là tab ở đâu, bên phải là ăn gì(vuốt)

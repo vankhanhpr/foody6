@@ -22,6 +22,7 @@ public class getdata
     public  static  int food_Street=1;
     public  static  int food_Catalory=1;
 
+
     public static int getFood_City() {
         return food_City;
     }
