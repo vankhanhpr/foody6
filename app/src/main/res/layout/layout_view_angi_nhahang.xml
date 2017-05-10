@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/listgray"
     android:orientation="horizontal">
 
@@ -15,7 +15,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="3dp"
         android:layout_marginTop="5dp"
-        android:layout_weight="1"
         android:background="@drawable/viencho_list"
         android:orientation="vertical"
         android:visibility="visible">
@@ -115,7 +114,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+ <!--   <LinearLayout
         android:id="@+id/food_ln_food2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -224,6 +223,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dip"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/red1"
         android:orientation="horizontal"
         android:weightSum="16">
 
@@ -177,11 +177,5 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!--<com.example.kunsubin.foody.GridViewAnGi.HeaderGridView
-        android:id="@+id/gridXemNhieu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
 
-    </com.example.kunsubin.foody.GridViewAnGi.HeaderGridView>-->
 </LinearLayout>

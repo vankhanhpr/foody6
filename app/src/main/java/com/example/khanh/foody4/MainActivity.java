@@ -92,8 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-
-
             /*Xử lí phần vuốt của tab layout bên trái là tab ở đâu, bên phải là ăn gì
             *    Hai Class tương ứng là ăn gì và ở đâu  Class angi,odau*/
             @Override

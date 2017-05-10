@@ -8,11 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorGray"
+        android:weightSum="12"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="490dp"
+            android:layout_height="0dp"
+            android:layout_weight="11"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,14 +151,14 @@
                 android:id="@+id/tab_chinh1"
                 android:layout_width="match_parent"
                 android:visibility="visible"
+                android:orientation="vertical"
                 android:layout_height="match_parent">
-
-                <ListView
-                    android:id="@+id/lv_angi_nhahang"
+                <com.example.khanh.foody4.HeaderGridView
+                    android:id="@+id/gridview_main"
+                    android:numColumns="2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-                </ListView>
+                </com.example.khanh.foody4.HeaderGridView>
 
 
             </LinearLayout>
@@ -270,13 +272,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_weight="1"
+            android:layout_height="0dp">
             <Button
                 android:id="@+id/button_huy_angi"
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                android:layout_height="match_parent"
                 android:text="Hủy"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@color/while1"
                 android:textAllCaps="false" />
         </LinearLayout>

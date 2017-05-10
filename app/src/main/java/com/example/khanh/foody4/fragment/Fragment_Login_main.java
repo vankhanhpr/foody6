@@ -1,9 +1,12 @@
 package com.example.khanh.foody4.fragment;
 
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ import com.example.khanh.foody4.customadapter.getdata;
 import com.example.khanh.foody4.get_set.user_member;
 import com.example.khanh.foody4.login.Edit_Profile;
 import com.example.khanh.foody4.login.Login;
+import com.example.khanh.foody4.login.SettingProfile;
 
 import org.kobjects.base64.Base64;
 
@@ -61,6 +65,7 @@ public class Fragment_Login_main extends Fragment implements View.OnClickListene
         return view;
     }
 
+    //Xử lí các sự kiện onClick
     @Override
     public void onClick(View v)
     {
@@ -74,14 +79,36 @@ public class Fragment_Login_main extends Fragment implements View.OnClickListene
                 sendToProfile(kq,111);
                 break;
             case R.id.tab_logout:
-                tab_logout.setVisibility(View.GONE);
+                logOut1();
                 break;
             case R.id.setting_user:
-
+                sendToSettingProfile(kq,222);
                 break;
         }
 
     }
+
+    //Hiển thị cho phép có chọn đăng xuất hay không
+    private void logOut1() {
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Đăng xuất ")
+                .setMessage("Bạn có muốn đăng xuất khỏi Foody")
+                .setPositiveButton("Đăng xuất", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                logOut();
+                            }
+                        }
+
+                )
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
     //Hàm gửi kết quả cho activity edit thông tin tài khoản
     public  void sendToProfile(String temp,int position )
     {
@@ -93,6 +120,16 @@ public class Fragment_Login_main extends Fragment implements View.OnClickListene
         startActivityForResult(intent,111);
     }
 
+    //Gọi activity đổi mật khẩu và avatar đồng thời truyền email để lấy mật khẩu và avartar
+    public  void sendToSettingProfile(String temp,int position )
+    {
+
+        Intent intent = new Intent(getActivity().getApplicationContext(),SettingProfile.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("KetQua",temp);
+        intent.putExtra("GoiTin", bundle);
+        startActivityForResult(intent,position);
+    }
     //Lấy dữ liệu truyền về khi đăng nhập thành công
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {

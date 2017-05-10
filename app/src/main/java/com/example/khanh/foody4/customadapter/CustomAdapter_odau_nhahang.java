@@ -14,6 +14,7 @@ import com.example.khanh.foody4.get_set.quanan_getset;
 import com.example.khanh.foody4.MainActivity;
 import com.example.khanh.foody4.R;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by Khanh on 4/3/2017.
@@ -24,10 +25,10 @@ public class CustomAdapter_odau_nhahang extends BaseAdapter
 
     //khởi tạo các đối tượng
     Context context;
-    List<String> tenNH;
-    List<String> diachi;
-    List<Float> diem;
-    List<quanan_getset> anh1;
+    List<String> tenNH= new ArrayList<>();
+    List<String> diachi= new ArrayList<>();
+    List<Float> diem= new ArrayList<>();
+    List<quanan_getset> anh1= new ArrayList<>();
     int vitri = 0;
 
     private static LayoutInflater inflater = null;
@@ -48,7 +49,7 @@ public class CustomAdapter_odau_nhahang extends BaseAdapter
     //trả về độ dài  danh sách
     @Override
     public int getCount() {
-        return tenNH.size();
+        return tenNH.size()==0?1:0;
     }
 
     //trả về vị trí click trong textview
@@ -60,6 +61,11 @@ public class CustomAdapter_odau_nhahang extends BaseAdapter
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
     }
 
     //chứa 1or nhiều đối tượng trong listview là textview và imageview

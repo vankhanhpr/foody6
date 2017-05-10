@@ -18,6 +18,7 @@ public class StaticObject
     public  static  String METHOD_CHECKLOGIN="ktDangNhap";
     public  static  String METHOD_GETUSER="getUser";
     public  static  String METHOD_CHANGEUSER="changeProfile";
+    public  static  String METHOD_CHANGEPASS="changePassword";
 
 
     public static String SOAP_ACTION_GETALLTINHTHANH  = NAME_SPACE+METHOD_GETALLTINHTHANH;
@@ -37,4 +38,6 @@ public class StaticObject
     public  static  String SOAP_ACTION_GETUSER=NAME_SPACE+METHOD_GETUSER;
 
     public  static  String SOAP_ACTION_CHANGEUSER=NAME_SPACE+METHOD_CHANGEUSER;
+
+    public static  String SOAP_ACTION_CHANGEPASS=NAME_SPACE+METHOD_CHANGEPASS;
 }

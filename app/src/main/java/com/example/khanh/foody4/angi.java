@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,8 +26,11 @@ import com.example.khanh.foody4.asynctask.AsyncLoadImage;
 import com.example.khanh.foody4.asynctask.AsyncLoadStreet;
 import com.example.khanh.foody4.bao.TestAdapter_angi_monan;
 import com.example.khanh.foody4.bao.TestAdapter_district;
+import com.example.khanh.foody4.customadapter.AdapterGridViewAnGi;
 import com.example.khanh.foody4.customadapter.CustomAdapter_District;
+import com.example.khanh.foody4.customadapter.CustomAdapter_odau_nhahang;
 import com.example.khanh.foody4.customadapter.ExpandableListAdapterODau;
+import com.example.khanh.foody4.customadapter.NoDataAdapter;
 import com.example.khanh.foody4.get_set.connect_database_district;
 import com.example.khanh.foody4.get_set.district;
 import com.example.khanh.foody4.get_set.food;
@@ -51,11 +55,9 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
 {
 
     /*odau odau;
-
     public odau getODau() {
         return odau;
     }
-
     public void setODau(odau odau) {
         this.odau = odau;
     }*/
@@ -86,7 +88,6 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
     public  static ExpandableListView lv_moinhat_angi_thanhpho;
     LinearLayout header_angi;
     AndroidImageAdapter adapterView2;
-    public  static  ListView lv_angi_nhahang;
     private ArrayList<monan_getset> listMonAn;
     public  static TextView tv_angi_danhmuc;
     public  static Button button_huy_angi;
@@ -99,10 +100,16 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
     ExpandableListAdapterODau expandableListAdapterODau;
     //CustomAdapter_District customAdapter_district;
 
+
+    HeaderGridView gridview_main;
+    View slideShowBanner;
+
     public angi(MainActivity mainActivity)
     {//tạo một hàm khởi tạo hàm main ở đây và context
         this.mainActivity=mainActivity;
         context=mainActivity;
+        mainA = (LayoutInflater) context.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     public  static  LayoutInflater inflater;
 
@@ -204,8 +211,8 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         tv_listview_thanhpho_angi.setOnClickListener(this);
 
             /*Gọi hàm chuyển ảnh*/
-            pageSwitcher(4);//Gọi hàm chạy ảnh trong ViewPager ở giữa với thời gian chuyển một ảnh là 4s
-            return  v;
+        pageSwitcher(4);//Gọi hàm chạy ảnh trong ViewPager ở giữa với thời gian chuyển một ảnh là 4s
+        return  v;
     }
 
 
@@ -321,6 +328,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
                 tab_listview_angi_thanhpho.setVisibility(View.GONE);
                 tab_listview_angi_danhmuc.setVisibility(View.GONE);
                 tab_listview1.setVisibility(View.GONE);
+                button_huy_angi.setVisibility(View.GONE);
                 flag_thanhpho=true;
                 flag_moinhat=true;
                 flag_moinhat=true;
@@ -352,18 +360,23 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
 
         listStreet= new ArrayList<>();
 
-        lv_angi_nhahang=(ListView)v.findViewById(R.id.lv_angi_nhahang);
         tv_angi_danhmuc=(TextView)v.findViewById(R.id.tv_angi_danhmuc);
+        gridview_main= (HeaderGridView)v.findViewById(R.id.gridview_main);
 
-        //Add header cho listView
-        View headerListView = inflater.inflate(R.layout.layout_main_header_angi,lv_angi_nhahang,false);
-        lv_angi_nhahang.addHeaderView(headerListView);
-        header_angi=(LinearLayout) headerListView.findViewById(R.id.header_angi);
+
+        slideShowBanner = inflater.inflate(R.layout.layout_main_header_angi, gridview_main, false);
+        gridview_main.addHeaderView(slideShowBanner);
+       header_angi=(LinearLayout) slideShowBanner.findViewById(R.id.header_angi);
+
+
 
 
         tv_listview_thanhpho_angi=(TextView)v.findViewById(R.id.tv_listview_thanhpho_angi_khanh);
         tv_listview_angi_thanhpho1=(TextView)v.findViewById(R.id.tv_listview_angi_thanhpho1);
         //list view chứa danh sách nhà hàng
+
+
+
 
 
         tab_new=(LinearLayout)v.findViewById(R.id.tab_listview_angi_moinhat2);
@@ -383,7 +396,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         button_huy_angi=(Button)v.findViewById(R.id.button_huy_angi);
 
 
-        pager_angi_1234=(ViewPager)v.findViewById(R.id.pager_angi_1234);
+        pager_angi_1234=(ViewPager)slideShowBanner.findViewById(R.id.pager_angi_1234);
 
         adapterView2 = new AndroidImageAdapter(this.getContext());
         pager_angi_1234.setAdapter(adapterView2);
@@ -443,6 +456,14 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
             odau.tv_examp11.setText(getdata.getTen_tp());
             odau.textView_odau_thanhpho_hcm.setText(getdata.getTen_tp());
             odau.lv_moinhat_odau_thanhpho.setAdapter(expandableListAdapterODau);
+
+
+            button_huy_angi.setVisibility(View.GONE);
+            mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
+            tab_chinh1.setVisibility(View.VISIBLE);
+            tab_thanh_pho_angi1.setBackgroundResource(R.color.colorWhite);
+            flag_thanhpho=true;
+
 
             getdata.setFood_City(getdata.getCity_ID());
             getdata.setFood_Disttrict(0);
@@ -514,8 +535,9 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         catch (ExecutionException e) {
             e.printStackTrace();
         }
-        CustomAdapter_angi_monan customAdapter_angi_monan= new CustomAdapter_angi_monan(inflater,context,listFood);
-        lv_angi_nhahang.setAdapter(customAdapter_angi_monan);
+
+        AdapterGridViewAnGi adapterGridViewAnGi = new AdapterGridViewAnGi(mainActivity,listFood);
+        gridview_main.setAdapter(adapterGridViewAnGi);
     }
     //Hàm sẽ tạo danh sách các danh mục theo mới nhất và danh mục
     //Gọi hàm adapter để trả về list tương ứng
@@ -609,20 +631,6 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         // đơn vị milliseconds
     }
 
-    //Hàm lấy món ăn và đổ vào list các món ăn
-   /* public  void  getMonAn()
-    {
-        listMonAn=new ArrayList<>();
-        ta_monan=new TestAdapter_angi_monan(context);
-        listMonAn=ta_monan.getListMonAn(getdata.getAngi_danhmuc(),getdata.getAngi_huyen(),getdata.getAngi_tinh());
-    }
-    //Bây giờ gọi lớp Adapter
-    public void LayMonAn()
-    {
-            CustomAdapter_angi_monan csmonan = new CustomAdapter_angi_monan(inflater, mainActivity, listMonAn);
-            lv_angi_nhahang.setAdapter(csmonan);
-    }*/
-
     @Override
     public void onExpand(int groupPosition)
     {
@@ -632,7 +640,6 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
             this.lv_moinhat_angi_thanhpho.expandGroup(groupPosition);
         }
     }
-
 
     // một clss để chạy các bức ảnh trong viewpager
     class RemindTask extends TimerTask

@@ -1,8 +1,10 @@
 package com.example.khanh.foody4.login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -122,10 +124,8 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
                 changeUser();
                 if(flag==true)
                 {
-                    Toast.makeText(this, "Thông tin của bạn đã được cập nhật", Toast.LENGTH_SHORT).show();
-                    loadUser(email);
-                    sendToMain(email,111);
-                    finish();
+                    editSuccess();
+
                 }
                 else
                     Toast.makeText(this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
@@ -133,10 +133,28 @@ public class Edit_Profile extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //Hàm thông báo sau khi thay đổi thông tin
+    private void editSuccess() {
+        new AlertDialog.Builder(this)
+                .setTitle("Thông tin của bạn đã được cập nhật!")
+                .setMessage("")
+                .setPositiveButton("Xong", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                loadUser(email);
+                                sendToMain(email,111);
+                                finish();
+                            }
+                        }
+
+
+              ).show();
+    }
+
+
     //Gửi dữ liệu về lại hàm main
     public  void sendToMain(String temp,int position )
     {
-
         Intent intent = getIntent();
         Bundle bundle = new Bundle();
         bundle.putString("KetQua",temp);

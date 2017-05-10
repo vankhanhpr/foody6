@@ -127,22 +127,8 @@ public class CustomAdapter_angi_monan extends BaseAdapter
             tv_address1 = (TextView)view.findViewById(R.id.food_tv_address1);
             tv_username1 = (TextView)view.findViewById(R.id.food_tv_username1);
             tv_des1 = (TextView)view.findViewById(R.id.food_tv_des1);
-            //x = (RoundedImageView)view.findViewById(R.id.food_imv_info1);
-            //food2
-            ln_food2 = (LinearLayout)view.findViewById(R.id.food_ln_food2);
-            ln_info2 = (LinearLayout)view.findViewById(R.id.food_ln_info2);
-            imv_info_2 = (ImageView)view.findViewById(R.id.food_imv_info2);
-            imv_user2 = (ImageView)view.findViewById(R.id.food_imv_user2);
-            food_name2 = (TextView)view.findViewById(R.id.food_tv_foodname2);
-            rest_name2 = (TextView)view.findViewById(R.id.food_tv_restname2);
-            tv_address2 = (TextView)view.findViewById(R.id.food_tv_address2);
-            tv_username2 = (TextView)view.findViewById(R.id.food_tv_username2);
-            tv_des2 = (TextView)view.findViewById(R.id.food_tv_des2);
+
         }
-
-
-
-        //
 
         public void renderData1(final food f,  View view) {
             ln_food1.setVisibility(View.VISIBLE);

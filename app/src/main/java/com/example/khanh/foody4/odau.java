@@ -363,6 +363,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 tab_listview_odau_thanhpho.setVisibility(v.GONE);
                 tab_listview_odau_danhmuc.setVisibility(v.GONE);
                 mainActivity.tab_button_nagi.setVisibility(v.VISIBLE);
+                button_huy.setVisibility(View.GONE);
 
                 tab_moinhat.setBackgroundResource(R.color.colorWhite);
                 tab_danhmuc.setBackgroundResource(R.color.colorWhite);

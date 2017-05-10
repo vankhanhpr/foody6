@@ -1,0 +1,177 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffeeeeee"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/choose_provine_top_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:background="#ffcc0000"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/bnt_changeprofile_back"
+            android:layout_width="50.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/list_view_login"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:padding="10.0dip"
+                android:src="@drawable/back" />
+        </LinearLayout>
+
+        <TextView
+
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/bnt_changeprofile_back"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:text="Thiết lập tài khoản"
+            android:gravity="center_vertical"
+            android:textColor="#ffffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dip"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="#ffc8c7cc"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/tab_change_avatar"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:background="@drawable/list_view_login"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_view_avatar"
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:layout_marginBottom="5.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:layout_marginTop="5.0dip"
+                android:cropToPadding="true"
+                android:src="@drawable/icon_user_avatar" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="Ảnh đại diện &amp; bìa"
+                android:textColor="#ff000000"
+                android:textSize="13dip" />
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="25.0dip"
+                android:layout_marginRight="10.0dip"
+                android:src="@drawable/icon_arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:layout_marginLeft="50.0dip"
+            android:background="#ffc8c7cc"
+            android:orientation="vertical"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/tab_setting_password"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:background="@drawable/list_view_login"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:layout_marginBottom="5.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:layout_marginTop="5.0dip"
+                android:cropToPadding="true"
+                android:src="@drawable/icon_password" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="Mật khẩu"
+                android:textColor="#ff000000"
+                android:textSize="13dip" />
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="25.0dip"
+                android:layout_marginRight="10.0dip"
+                android:src="@drawable/icon_arrow_right" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="8dip"
+            android:background="#ffeeeeee" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:background="@drawable/list_view_login"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="30.0dip"
+                android:layout_height="30.0dip"
+                android:layout_marginBottom="5.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:layout_marginTop="5.0dip"
+                android:cropToPadding="true"
+                android:src="@drawable/icon_session" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="Quản lý phiên hoạt động"
+                android:textColor="#ff000000"
+                android:textSize="13dip" />
+
+            <ImageView
+                android:layout_width="30.0dip"
+                android:layout_height="25.0dip"
+                android:layout_marginRight="10.0dip"
+                android:src="@drawable/icon_arrow_right" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

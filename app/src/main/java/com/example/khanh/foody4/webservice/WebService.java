@@ -433,4 +433,39 @@ public class WebService {
         }
         return resuft;
     }
+
+    //Thay đổi mật khẩu
+    public boolean changePass(String email,String pass)
+    {
+        boolean resuft=false;
+        SoapObject request = new SoapObject(StaticObject.NAME_SPACE, StaticObject.METHOD_CHANGEPASS);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("email",email);
+        request.addProperty("password",pass);
+
+        envelope.setOutputSoapObject(request);
+        MarshalFloat marshalFloat = new MarshalFloat();
+        marshalFloat.register(envelope);
+
+        HttpTransportSE HttpsTransport = new HttpTransportSE(StaticObject.URL);
+
+        try {
+
+            HttpsTransport.call(StaticObject.SOAP_ACTION_CHANGEPASS, envelope);
+
+            SoapPrimitive item = (SoapPrimitive) envelope.getResponse();
+            String temp=item.toString();
+            resuft = Boolean.parseBoolean(temp);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return resuft;
+    }
 }
