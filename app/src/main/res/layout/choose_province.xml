@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorWhite">
+
+        <!--<RelativeLayout
+            android:id="@+id/choose_provine_top_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:background="#ffcc0000"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/choose_provine_top_bar_title"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:text="Chọn thành phố"
+                android:textColor="#ffffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </RelativeLayout>-->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10">
+            <ListView
+                android:id="@+id/list_view_choose_province"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="9"
+                android:cacheColorHint="#00000000"
+                android:childDivider="#ffeeeeee"
+                android:clickable="false"
+                android:divider="#ffdddddd"
+                android:dividerHeight="1.0px"
+                android:indicatorLeft="@null" />
+
+            <TextView
+                android:id="@+id/tv_no_select_city"
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:layout_height="45dip"
+                android:text="Bỏ qua"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:background="@color/colorGray"
+                >
+
+            </TextView>
+        </LinearLayout>
+
+</RelativeLayout>

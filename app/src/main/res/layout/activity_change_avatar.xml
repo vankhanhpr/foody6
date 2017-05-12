@@ -60,7 +60,7 @@
             android:layout_marginTop="5.0dip"
             android:text="HÌNH ĐẠI DIỆN"
             android:textColor="#ff888888"
-            android:textSize="12SP" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -82,13 +82,13 @@
                 android:clickable="true"
                 android:gravity="center_vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profile_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/icon_user_avatar"
                     app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp" />
+                    app:civ_border_width="2dp" />-->
 
                 <TextView
                     android:layout_width="0.0dip"

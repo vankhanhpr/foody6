@@ -220,12 +220,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragmentTransaction.hide(fragment_Collage);
                 break;
             case R.id. imv_f:
-                Intent intent = new Intent(getApplicationContext(), mainf.class);
-                // gọi activity.
+                Intent intent = new Intent(getApplicationContext(),mainf.class);
                 startActivity(intent);
                 break;
             case R.id.imv_mainplus:
-
+                Create_plus create_plus = new Create_plus();
+                create_plus.show(getSupportFragmentManager(), create_plus.getTag());
                 break;
             default:
                 break;

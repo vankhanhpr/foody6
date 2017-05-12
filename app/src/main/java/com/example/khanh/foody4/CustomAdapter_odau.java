@@ -24,11 +24,13 @@ public class CustomAdapter_odau extends BaseAdapter
     List<Integer> imageId;
     private static LayoutInflater inflater=null;
     MainActivity mn;
-    public CustomAdapter_odau(MainActivity mainActivity,List<String> prgmNameList, List<Integer> prgmImages)
+    IOnSetDefaultCity onSetDefaultCity;
+    public CustomAdapter_odau(MainActivity mainActivity,List<String> prgmNameList, List<Integer> prgmImages,IOnSetDefaultCity onSetDefaultCity)
     {
         // TODO Auto-generated constructor stub
         result=prgmNameList;
         context=mainActivity;
+        this.onSetDefaultCity=onSetDefaultCity;
         mn=mainActivity;
         imageId=prgmImages;
         inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -129,10 +131,16 @@ public class CustomAdapter_odau extends BaseAdapter
                 mn.tab_button_nagi.setVisibility(v.VISIBLE);
                 odau.button_huy.setVisibility(v.GONE);
 
+                onSetDefaultCity.onSetDefaultCity();
+
                 odau.flag_odau=true;
                 odau.tab_moinhat.setBackgroundResource(R.color.colorWhite);
             }
         });
         return rowView;
+    }
+    public interface IOnSetDefaultCity
+    {
+        void onSetDefaultCity();
     }
 }

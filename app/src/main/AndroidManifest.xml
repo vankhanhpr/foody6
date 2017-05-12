@@ -34,7 +34,8 @@
         <activity android:name=".login.Login" />
         <activity android:name=".login.Edit_Profile" />
         <activity android:name=".login.SettingProfile" />
-        <activity android:name=".login.SettingPass" />
+
+        <activity android:name=".insert_restaurant.Insert_Restaurant" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

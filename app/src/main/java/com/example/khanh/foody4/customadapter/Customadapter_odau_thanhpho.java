@@ -121,7 +121,6 @@ public class Customadapter_odau_thanhpho extends BaseAdapter
                         onSetDefaultCity.onSetDefaultCity();
                     }
                 });
-
             }
         });
         return rowView;

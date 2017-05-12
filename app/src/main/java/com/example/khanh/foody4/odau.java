@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.khanh.foody4.asynctask.AsyncLoadDistrict;
 import com.example.khanh.foody4.asynctask.AsyncLoadImage;
+import com.example.khanh.foody4.asynctask.AsyncLoadResNew;
 import com.example.khanh.foody4.asynctask.AsyncLoadRest;
 import com.example.khanh.foody4.asynctask.AsyncLoadStreet;
 import com.example.khanh.foody4.bao.TestAdapter_district;
@@ -55,17 +56,8 @@ import java.util.concurrent.ExecutionException;
  * Created by Khanh on 4/1/2017.
  */
 
-public class odau extends Fragment implements View.OnClickListener,IChooseStreet
+public class odau extends Fragment implements View.OnClickListener,IChooseStreet,CustomAdapter_odau.IOnSetDefaultCity
 {
-   /* angi Angi;
-
-    public angi getAngi() {
-        return Angi;
-    }
-
-    public void setAngi(angi angi) {
-        Angi = angi;
-    }*/
 
     //Phần khai báo các đối tượng
     List<String >arr_moinhat,arr_danhmuc,arr_district,arr_tennhahang,arr_diachi;
@@ -110,6 +102,9 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
     ViewPager pager1;
     Timer timer;//Khai báo để tự động chạy viewPager
 
+
+
+
     public static ArrayAdapter arrayAdapterhuyen;
 
     //khởi tạo đói tượng mainActiviti và context
@@ -119,11 +114,9 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         context= mainActivity;
     }
     LayoutInflater inflater;
-    CustomAdapter_District customAdapter_district;
     HashMap <district,List<street> > listHashMap;
     CustomAdapter_Restaurant_Where customAdapter_restaurant_where;
     List<restaurant>listRestaurant;
-    ImageView imv_thunghiem;
 
     //Phần thân bắt các sự kiện click trên LinearLayout, listview .....
     //gọi các hàm lấy dữ liệu và hàm adapter đổ dữ liệu và list...
@@ -143,7 +136,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         load_District();
 
 
-        loadRestaurant();
+        loadRestaurantNew();
 
 
         //getListTenNhaHang();
@@ -192,14 +185,16 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-                //textView_odau_thanhpho_hcm.setText(listStreet.get(groupPosition).getStreet_Name().toString());
-                //textView_odau_thanhpho_hcm.setTextColor(context.getResources().getColor(R.color.red1));
+                textView_odau_thanhpho_hcm.setText(listStreet.get(childPosition).getStreet_Name().toString());
+                textView_odau_thanhpho_hcm.setTextColor(context.getResources().getColor(R.color.red1));
 
                 tab_thanh_pho_odau.setBackgroundResource(R.color.colorWhite);
                 tab_chinh_odau.setVisibility(View.VISIBLE);
                 tab_listview_odau_thanhpho.setVisibility(View.GONE);
                 mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
                 button_huy.setVisibility(View.GONE);
+                //Lấy dữ liệu nhà hàng theo mới nhất
+
 
                 flag_thanhpho=true;
                 return false;
@@ -234,10 +229,8 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 button_huy.setVisibility(View.VISIBLE);
 
                 flag_danhmuc=false;
-
             }
         });
-
 
         //Xử lí nút hủy
         //Bật tab chính của giao diện và tắt tất cả các tab khác
@@ -398,7 +391,6 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         try
         {
             listRestaurant=asyncLoadRest.execute(getdata.getRes_City(),getdata.getRes_Disttrict(),getdata.getRest_Catalory(),getdata.getRest_Street()).get();
-
             //Log.d("res",listRestaurant.get(0).getRest_Name().toString());
             if(listRestaurant.size()>0)
             {
@@ -413,6 +405,46 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                         byte[] valueDecoded = Base64.decode(image);
                         listRestaurant.get(i).setImage_res(valueDecoded);
                        // Toast.makeText(mainActivity, "khanh"+valueDecoded, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+            Log.d("Loi","Loi rui!!!");
+        }
+        catch (ExecutionException e)
+        {
+            Log.d("Loi","Loi rui2");
+            e.printStackTrace();
+        }
+        customAdapter_restaurant_where= new CustomAdapter_Restaurant_Where(mainActivity,listRestaurant);
+        lv_nhahang_odau.setAdapter(customAdapter_restaurant_where);
+    }
+    //Lấy danh sách theo mới nhất
+    public  void loadRestaurantNew()
+    {
+        AsyncLoadResNew asyncLoadResNew= new AsyncLoadResNew();
+
+        try
+        {
+            listRestaurant=asyncLoadResNew.execute().get();
+
+            //Log.d("res",listRestaurant.get(0).getRest_Name().toString());
+            if(listRestaurant.size()>0)
+            {
+                for(int i=0;i<listRestaurant.size();i++)
+                {
+                    String image="";
+                    AsyncLoadImage asyncLoadImage = new AsyncLoadImage();
+                    //Log.d("khanh5",listRestaurant.get(0).getPhoto().toString());
+                    image= asyncLoadImage.execute(listRestaurant.get(i).getPhoto().toString()).get();
+                    if(image!=null)
+                    {
+                        byte[] valueDecoded = Base64.decode(image);
+                        listRestaurant.get(i).setImage_res(valueDecoded);
+                        // Toast.makeText(mainActivity, "khanh"+valueDecoded, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -492,8 +524,8 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             {
                 AsyncLoadStreet asyncLoadStreet= new AsyncLoadStreet();
                 List<street> duongList = asyncLoadStreet.execute(listDistrict.get(i).getDistrict_ID()).get();
-                listHashMap.put(listDistrict.get(i), duongList);
-
+                listHashMap.put(listDistrict.get(i),duongList);
+                listStreet=duongList;
             }
         }
         catch (InterruptedException e)
@@ -606,7 +638,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         arr_moinhat.add("Đặt chỗ");
         arr_moinhat.add("Ưu đãi thẻ");
         arr_moinhat.add("Đặt giao hàng");
-        CAMoinhat=new CustomAdapter_odau(mainActivity,arr_moinhat,image_moinhat);
+        CAMoinhat=new CustomAdapter_odau(mainActivity,arr_moinhat,image_moinhat,this);
     }
     //thêm các đối tượng vào list và gọi hàm adapter để trả về list danh mục
     public void setItem_danhmuc(View v)
@@ -711,6 +743,11 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         // đơn vị milliseconds
     }
 
+    @Override
+    public void onSetDefaultCity() {
+        loadRestaurantNew();
+    }
+
     // đây là một class giúp chạy các bắc ảnh trong trong ViewPaper.
     class RemindTask extends TimerTask
     {
@@ -734,5 +771,10 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             });
         }
     }
+    /*public interface IOnSetDefaultCity
+    {
+        void onSetDefaultCity();
+    }*/
+
 
 }

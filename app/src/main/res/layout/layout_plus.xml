@@ -96,6 +96,7 @@
                     android:id="@+id/textView" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/tab_insert_restaurant"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:orientation="horizontal">

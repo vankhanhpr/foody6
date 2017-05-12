@@ -65,6 +65,8 @@ public class SettingProfile extends AppCompatActivity implements OnClickListener
             // lấy giá trị kết quả
             Bundle bundle = data.getBundleExtra("GoiTin");
             kq = bundle.getString("KetQua");
+            /*if(Character.isDigit(kq.charAt(0)) && Character.isAlphabetic())*/
+
 
         }
     }
