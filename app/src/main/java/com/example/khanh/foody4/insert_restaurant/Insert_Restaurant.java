@@ -78,6 +78,12 @@ public class Insert_Restaurant extends AppCompatActivity implements View.OnClick
 
                 list_view_choose_province=(ListView)dialog.findViewById(R.id.list_view_choose_province);
                 tv_no_select_city=(TextView)dialog.findViewById(R.id.tv_no_select_city);
+                tv_no_select_city.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
 
                 AsyncLoadCity asyncLoadCity= new AsyncLoadCity();
                 try {

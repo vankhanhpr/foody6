@@ -24,21 +24,13 @@ import java.util.List;
 
 public class CustomAdapter_odau_danhmuc extends BaseAdapter
 {
-
-    List<String>arr_tennhahang;
-    List<String>arr_diachi;
-    List<Float>arr_diem;
-
     List<String> result;
     List<Integer> imageId;
 
-    private  ArrayList<quanan_getset> listTenNhaHang;
 
     private static LayoutInflater inflater=null;
     Activity mn;
-    int vitri=0;
-    private  ArrayList<quanan_getset> listTenNhaHang2;
-    TestAdapter_restaurant ta_nhahang1;
+    public  static  int vitri=0;
     public MainActivity mainActivity;
 
     Context context;

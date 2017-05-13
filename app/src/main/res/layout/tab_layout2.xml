@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:baselineAligned="false"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorGray"
-        android:weightSum="12"
+        android:paddingBottom="40dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="11"
+            android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -172,7 +171,7 @@
                 <ListView
                     android:id="@+id/lv_moinhat_angi_danhmuc"
                     android:layout_width="match_parent"
-                    android:layout_height="980px"
+                    android:layout_height="match_parent"
                     android:background="@color/while1">
                 </ListView>
                 <LinearLayout
@@ -246,7 +245,7 @@
                     <ExpandableListView
                         android:id="@+id/lv_moinhat_angi_thanhpho"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@color/while1">
                     </ExpandableListView>
                 </LinearLayout>
@@ -269,24 +268,18 @@
             </LinearLayout>
 
         </LinearLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp">
-            <Button
-                android:id="@+id/button_huy_angi"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Hủy"
-                android:visibility="visible"
-                android:background="@color/while1"
-                android:textAllCaps="false" />
-        </LinearLayout>
-        </LinearLayout>
-
-
+    <Button
+        android:id="@+id/button_huy_angi"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Hủy"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:background="@color/while1"
+        android:textAllCaps="false" />
     <!--ScrollView-->
 
 
-</LinearLayout>
+</RelativeLayout>

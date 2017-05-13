@@ -196,6 +196,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 //Lấy dữ liệu nhà hàng theo mới nhất
 
 
+
                 flag_thanhpho=true;
                 return false;
             }
@@ -207,6 +208,31 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+
+                ImageView imageView,imv2;
+                TextView textView;
+                CustomAdapter_odau_danhmuc.vitri=position;
+                for(int i=0;i<parent.getChildCount();i++)
+                {
+                    imageView=(ImageView) parent.findViewById(R.id.imv_check);
+                    imv2=(ImageView) parent.findViewById(R.id.imageView10);
+                    textView=(TextView)parent.findViewById(R.id.textView10);
+
+                    imageView.setVisibility(View.GONE);
+                    textView.setTextColor(context.getResources().getColor(R.color.black_icon));
+
+                    /*if(i==0)
+                    {
+                        imv2.setVisibility(View.GONE);
+                    }*/
+                }
+                Toast.makeText(mainActivity, ""+position, Toast.LENGTH_SHORT).show();
+
+                imageView=(ImageView)view.findViewById(R.id.imv_check) ;
+                textView=(TextView)view.findViewById(R.id.textView10);
+                imageView.setImageResource(R.drawable.icon_check);
+                imageView.setVisibility(View.VISIBLE);
+                textView.setTextColor(context.getResources().getColor(R.color.red1));
 
 
                 tv_odau_danhmuc.setText(arr_danhmuc.get(position).toString());
@@ -226,7 +252,9 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 tab_chinh_odau.setVisibility(View.VISIBLE);
 
                 tab_listview_odau_danhmuc.setVisibility(View.GONE);
-                button_huy.setVisibility(View.VISIBLE);
+                button_huy.setVisibility(View.GONE);
+                mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
+
 
                 flag_danhmuc=false;
             }

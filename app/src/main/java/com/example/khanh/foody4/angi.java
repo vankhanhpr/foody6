@@ -187,6 +187,8 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
                 tab_listview_angi_danhmuc.setVisibility(view.GONE);
                 tab_chinh1.setVisibility(view.VISIBLE);
                 button_huy_angi.setVisibility(view.GONE);
+                mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
+
                 tv_angi_danhmuc.setText(arr_danhmuc.get(position).toString());
                 tv_angi_danhmuc.setTextColor(context.getResources().getColor(R.color.red1));
 
