@@ -77,6 +77,12 @@ public class CustomAdapter_angi_monan extends BaseAdapter
         return position;
     }
 
+    @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
+
+
     //trả về view chứa danh sách  các đối tượng để trộn
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {

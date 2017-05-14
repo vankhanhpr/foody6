@@ -19,27 +19,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.khanh.foody4.asynctask.AsyncLoadDistrict;
 import com.example.khanh.foody4.asynctask.AsyncLoadImage;
 import com.example.khanh.foody4.asynctask.AsyncLoadResNew;
 import com.example.khanh.foody4.asynctask.AsyncLoadRest;
 import com.example.khanh.foody4.asynctask.AsyncLoadStreet;
-import com.example.khanh.foody4.bao.TestAdapter_district;
-import com.example.khanh.foody4.bao.TestAdapter_restaurant;
-import com.example.khanh.foody4.bao.TestAdapter_restaurant_city;
-import com.example.khanh.foody4.bao.TestAdapter_restaurant_province;
-import com.example.khanh.foody4.customadapter.CustomAdapter_District;
 import com.example.khanh.foody4.customadapter.CustomAdapter_Restaurant_Where;
 import com.example.khanh.foody4.customadapter.ExpandableListAdapterODau;
 import com.example.khanh.foody4.get_set.district;
-import com.example.khanh.foody4.get_set.quanan_getset;
-import com.example.khanh.foody4.customadapter.CustomAdapter_odau_nhahang;
 import com.example.khanh.foody4.customadapter.getdata;
 import com.example.khanh.foody4.get_set.restaurant;
 import com.example.khanh.foody4.get_set.street;
+import com.example.khanh.foody4.insert_restaurant.Select_Restaurant;
 import com.example.khanh.foody4.myinterface.IChooseStreet;
 import com.example.khanh.foody4.select_city_district.Select_province;
 
@@ -63,13 +55,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
     List<String >arr_moinhat,arr_danhmuc,arr_district,arr_tennhahang,arr_diachi;
     List<Float>arr_diem;
 
-    //Phần khai các đối tượng để lấy dữ liệu
-    TestAdapter_restaurant  ta_nhahang;
-    TestAdapter_restaurant_city ta_nhahang_city;
-    TestAdapter_restaurant_province ta_nhahang_tinh;
-    ArrayList<quanan_getset> listTenNhaHang;
-    TestAdapter_district distric;
-    public static CustomAdapter_odau_nhahang cs;
+
     List<Integer>image_moinhat,image_danhmuc;
     CustomAdapter_odau CAMoinhat;
     List<district> listDistrict;
@@ -124,10 +110,6 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState)
 
     {
-        //Khởi tạo các class lấy dữ liệu nhà hàng
-        ta_nhahang=new TestAdapter_restaurant(context);
-        ta_nhahang_city=new TestAdapter_restaurant_city(context);
-        ta_nhahang_tinh=new TestAdapter_restaurant_province(context);
         View v= inflater.inflate(R.layout.tab_layout_odau,container, false);
         this.inflater = inflater;
         unit(v);
@@ -170,9 +152,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 getdata.setRes_Disttrict(listDistrict.get(groupPosition).getDistrict_ID());
                 getdata.setRest_Catalory(0);
                 getdata.setRest_Street(0);
-                Toast.makeText(mainActivity,""+groupPosition, Toast.LENGTH_SHORT).show();
                 loadRestaurant();
-
 
                 return  false;
             }
@@ -185,7 +165,11 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-                textView_odau_thanhpho_hcm.setText(listStreet.get(childPosition).getStreet_Name().toString());
+                //textView_odau_thanhpho_hcm.setText(listStreet.get(childPosition).getStreet_Name().toString());
+
+                street streetselected = expandableListAdapterODau.getChild(groupPosition,childPosition);
+                textView_odau_thanhpho_hcm.setText(streetselected.getStreet_Name());
+
                 textView_odau_thanhpho_hcm.setTextColor(context.getResources().getColor(R.color.red1));
 
                 tab_thanh_pho_odau.setBackgroundResource(R.color.colorWhite);
@@ -195,7 +179,11 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 button_huy.setVisibility(View.GONE);
                 //Lấy dữ liệu nhà hàng theo mới nhất
 
-
+                getdata.setRes_City(0);
+                getdata.setRes_Disttrict(0);
+                getdata.setRest_Catalory(0);
+                getdata.setRest_Street(streetselected.getStreet_ID());
+                loadRestaurant();
 
                 flag_thanhpho=true;
                 return false;
@@ -208,28 +196,29 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                CADanhmuc.vitri=position;
+
+                CADanhmuc.positionselected=position;
 
                 ImageView imageView,imv2;
                 TextView textView;
-                CustomAdapter_odau_danhmuc.vitri=position;
+                flag_danhmuc=true;
                 for(int i=0;i<parent.getChildCount();i++)
                 {
-                    imageView=(ImageView) parent.findViewById(R.id.imv_check);
-                    imv2=(ImageView) parent.findViewById(R.id.imageView10);
-                    textView=(TextView)parent.findViewById(R.id.textView10);
+
+                    imageView = (ImageView) parent.getChildAt(i).findViewById(R.id.imv_check);
+                    imv2 = (ImageView) parent.getChildAt(i).findViewById(R.id.imageView10);
+                    textView = (TextView) parent.getChildAt(i).findViewById(R.id.textView10);
 
                     imageView.setVisibility(View.GONE);
-                    textView.setTextColor(context.getResources().getColor(R.color.black_icon));
+                    textView.setTextColor(context.getResources().getColor(R.color.black_text));
 
-                    /*if(i==0)
-                    {
-                        imv2.setVisibility(View.GONE);
-                    }*/
                 }
-                Toast.makeText(mainActivity, ""+position, Toast.LENGTH_SHORT).show();
+
 
                 imageView=(ImageView)view.findViewById(R.id.imv_check) ;
                 textView=(TextView)view.findViewById(R.id.textView10);
+
                 imageView.setImageResource(R.drawable.icon_check);
                 imageView.setVisibility(View.VISIBLE);
                 textView.setTextColor(context.getResources().getColor(R.color.red1));
@@ -240,8 +229,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
 
                 getdata.setRes_City(0);
                 getdata.setRes_Disttrict(0);
-                getdata.setRest_Catalory(position);
-                Toast.makeText(mainActivity, ""+position, Toast.LENGTH_SHORT).show();
+                getdata.setRest_Catalory(position+1);
                 getdata.setRest_Street(0);
                 loadRestaurant();
 
@@ -255,10 +243,18 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 button_huy.setVisibility(View.GONE);
                 mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
 
-
-                flag_danhmuc=false;
             }
         });
+
+        //Khi nhấn vào xem nhà hàng
+        lv_nhahang_odau.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), Select_Restaurant.class);
+                startActivityForResult(intent, 666);
+            }
+        });
+
 
         //Xử lí nút hủy
         //Bật tab chính của giao diện và tắt tất cả các tab khác
@@ -401,8 +397,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
                 button_huy.setVisibility(View.GONE);
                 tab_thanh_pho_odau.setBackgroundResource(R.color.colorWhite);
                 textView_odau_thanhpho_hcm.setText(getdata.getTen_tp());
-                //getListTenNhaHang_TheoTinh();
-                //setItem_nhahang_TheoTinh();
+
                 flag_danhmuc=true;
                 flag_odau=true;
                 flag_thanhpho=true;
@@ -634,8 +629,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //getListTenNhaHang_TheoTinh();
-                //setItem_nhahang_TheoTinh();
+
             }
 
             @Override
@@ -746,12 +740,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
 
     }
     //Hàm lấy ra danh sách đối tượng nhà hàng
-    public   List<quanan_getset> getListTenNhaHang()
-    {
-        listTenNhaHang = new ArrayList<>();
-        listTenNhaHang = ta_nhahang.getListNhaHang(getdata.getDanhmuc());
-        return  listTenNhaHang;
-    }
+
     //Lấy danh sách đường theo quận huyện
     @Override
     public void onExpand(int groupPosition)

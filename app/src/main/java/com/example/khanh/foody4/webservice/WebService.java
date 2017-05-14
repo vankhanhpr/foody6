@@ -534,4 +534,72 @@ public class WebService {
         }
         return lisResNew;
     }
+    //Lấy nhà hàng theo món ăn
+    public  restaurant getResFood(int resID)
+    {
+        restaurant restaurant1=null;
+        SoapObject request = new SoapObject(StaticObject.NAME_SPACE, StaticObject.METHOD_GETRESFOOD);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = true;
+        request.addProperty("resID",resID);
+
+        envelope.setOutputSoapObject(request);
+        MarshalFloat marshalFloat = new MarshalFloat();
+        marshalFloat.register(envelope);
+
+        HttpTransportSE HttpsTransport = new HttpTransportSE(StaticObject.URL);
+
+        try {
+            HttpsTransport.call(StaticObject.SOAP_ACTION_GETRESFOOD, envelope);
+            SoapObject arraySoapObject = (SoapObject) envelope.bodyIn;
+            SoapObject item;
+            restaurant1= new restaurant();
+            item = (SoapObject) arraySoapObject.getProperty(0);
+
+            String res_ID = item.getProperty("Rest_ID").toString();
+            String rest_Name = item.getProperty("Rest_Name").toString();
+
+            String city_ID = item.getProperty("City_ID").toString();
+            String district_ID = item.getProperty("District_ID").toString();
+            String street_ID = item.getProperty("Stress_ID").toString();
+
+            String address_Name = item.getProperty("Address_Name").toString();
+            String phone = item.getProperty("Phone").toString();
+            String photo = item.getProperty("Photo").toString();
+
+            String totalView = item.getProperty("TotalView").toString();
+            String point = item.getProperty("Point").toString();
+
+            String categor_ID = item.getProperty("Category_ID").toString();
+            String where_Type = item.getProperty("Where_Type").toString();
+            String rest_Type = item.getProperty("Rest_Type").toString();
+
+
+            restaurant1.setRes_ID(Integer.parseInt(res_ID));
+            restaurant1.setRest_Name(rest_Name);
+            restaurant1.setCity_ID(Integer.parseInt(city_ID));
+
+            restaurant1.setDistrict_ID(Integer.parseInt(district_ID));
+            restaurant1.setStreet_ID(Integer.parseInt(street_ID));
+            restaurant1.setAddress_Name(address_Name);
+            restaurant1.setPhone(phone);
+            restaurant1.setPhoto(photo);
+            restaurant1.setPoint(Float.parseFloat(point));
+
+            restaurant1.setTotalView(Integer.parseInt(totalView));
+            restaurant1.setWhere_Type(Integer.parseInt(where_Type));
+            restaurant1.setRest_Type(Integer.parseInt(rest_Type));
+            restaurant1.setCategor_ID(Integer.parseInt(categor_ID));
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        catch (XmlPullParserException e)
+        {
+            e.printStackTrace();
+        }
+        return  restaurant1;
+    }
 }

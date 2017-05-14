@@ -3,7 +3,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,14 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.khanh.foody4.asynctask.AsyncLoadCity;
-import com.example.khanh.foody4.bao.TestAdapter;
 import com.example.khanh.foody4.customadapter.CustomAdapter_City;
 import com.example.khanh.foody4.get_set.city;
 import com.example.khanh.foody4.get_set.connect_database_city;
-import com.example.khanh.foody4.customadapter.Customadapter_odau_thanhpho;
 import com.example.khanh.foody4.customadapter.getdata;
 import com.example.khanh.foody4.R;
 
@@ -27,29 +23,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.example.khanh.foody4.odau.cs;
 
 /**
  * Created by Khanh on 3/31/2017.
  */
 
 //class giúp đổi tỉnh thành khác lấy mã tỉnh để gửi về 2 class ăn gì và ở đâu
-public class Select_province extends AppCompatActivity implements AdapterView.OnItemClickListener,Customadapter_odau_thanhpho.IOnSetDefaultCity
+public class Select_province extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
     //Khai báo các đối tượng
     ImageView imv_lv_back,imv_lv_search_top;
     TextView tv_lv_xong;
-    List<String> arr_thanhpho;
+
     List<Integer> image_danhmuc;
     Context context;
     //MainActivity mainActivity;
     ListView listview_province;
-    TestAdapter ta;
     connect_database_city Tinh;
     Select_header_provice Customadapter;
     EditText edittext_lv;
     LinearLayout tab_lv_xacdinhvitri,tab_lv_xacdinhquocgia;
-    Customadapter_odau_thanhpho customadapter_odau_thanhpho;
     private ArrayList<connect_database_city>listThanhPho;
     int k=0;
     List<city>listCity;
@@ -61,10 +54,6 @@ public class Select_province extends AppCompatActivity implements AdapterView.On
         context = getApplicationContext();//khởi tạo context
         unit();//hàm khởi tạo
         super.onCreate(savedInstanceState);//kế thừa
-        //ta=new TestAdapter(getApplicationContext());//hàm lấy dữ liệu
-        //getListTP();//lấy danh sách đối tượng thành phố
-        //;setItem_thanhpho();//đổ dánh sách đối tượng thành phố vào list
-        //nhấn vào nút back không chọn nữa thì đóng activity/
 
         //Lấy cơ sở dữ liệu từ service và đổ vào listView
         listCity=new ArrayList<>();
@@ -161,7 +150,7 @@ public class Select_province extends AppCompatActivity implements AdapterView.On
     {
         imv_lv_back=(ImageView)findViewById(R.id.imv_lv_back);
         tv_lv_xong=(TextView)findViewById(R.id.tv_lv_xong);
-        arr_thanhpho=new ArrayList<>();
+
         image_danhmuc=new ArrayList<>();
         listview_province=(ListView)findViewById(R.id.listview_province);
 
@@ -199,9 +188,9 @@ public class Select_province extends AppCompatActivity implements AdapterView.On
     }
 
     //hàm này giúp hàm khác gọi được hàm gửi tin về qua interface cụ thể là hàm customadapter
-    @Override
+    /*@Override
     public void onSetDefaultCity()
     {
         sendToMain(getdata.getCity_ID(),123);
-    }
+    }*/
 }

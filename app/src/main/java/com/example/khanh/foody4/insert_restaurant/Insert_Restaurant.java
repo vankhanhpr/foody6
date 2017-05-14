@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -99,6 +100,14 @@ public class Insert_Restaurant extends AppCompatActivity implements View.OnClick
                 catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+                list_view_choose_province.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        text_view_choose_province.setText(listCity.get(position).getCity_Name());
+                        getdata.setChoose_city(listCity.get(position).getCity_ID());
+                        dialog.cancel();
+                    }
+                });
 
 
                 // Sự kiện nhấn vào listView và nhấn vào nút bỏ qua
@@ -119,10 +128,10 @@ public class Insert_Restaurant extends AppCompatActivity implements View.OnClick
                 AsyncLoadDistrict asyncLoadDistrict = new AsyncLoadDistrict();
 
                 try {
-                    listDistrict= asyncLoadDistrict.execute(getdata.getCity_ID()).get();
-                    Toast.makeText(mainActivity, ""+listDistrict.get(1).getDistrict_Name().toString(), Toast.LENGTH_SHORT).show();
-                    //CustomAdapter_District customAdapter_district= new CustomAdapter_District(this.mainActivity,listDistrict);
-                   // list_view_choose_district.setAdapter(customAdapter_district);
+                    listDistrict= asyncLoadDistrict.execute(getdata.getChoose_city()).get();
+                    //Toast.makeText(mainActivity, ""+listDistrict.get(1).getDistrict_Name().toString(), Toast.LENGTH_SHORT).show();
+                    CustomAdapter_District customAdapter_district= new CustomAdapter_District(this.mainActivity,listDistrict);
+                    list_view_choose_district.setAdapter(customAdapter_district);
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();

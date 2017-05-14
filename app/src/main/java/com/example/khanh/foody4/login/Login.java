@@ -84,6 +84,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener
                 if(temp==1) {
                     Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     sendToMain(user,789);
+                    sendToMain(user,777);
+                    sendToMain(user,888);
                 }
                 else {
                     Toast.makeText(this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();

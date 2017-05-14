@@ -12,10 +12,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.khanh.foody4.MainActivity;
 import com.example.khanh.foody4.R;
+import com.example.khanh.foody4.asynctask.AsyncGetResFood;
 import com.example.khanh.foody4.get_set.food;
 import com.example.khanh.foody4.get_set.quanan_getset;
+import com.example.khanh.foody4.get_set.restaurant;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -26,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdapterGridViewAnGi extends BaseAdapter{
     Context context;
     List<food> listNhaHang;
+    //restaurant res;
     private static LayoutInflater inflater=null;
     //IChooseItemNhaHang iChoose;
    /* public void setChooseNhaHang(IChooseItemNhaHang iChoose) {
@@ -64,10 +68,7 @@ public class AdapterGridViewAnGi extends BaseAdapter{
         LinearLayout ln_food1,ln_info1;
         ImageView imv_info_1,imv_user1;
         TextView food_name1,rest_name1,tv_address1,tv_username1,tv_des1;
-        //food 2
-        LinearLayout ln_food2,ln_info2;
-        ImageView imv_info_2,imv_user2;
-        TextView food_name2,rest_name2,tv_address2,tv_username2,tv_des2;
+        //
         public Holder(View view){
             ln_food1 = (LinearLayout)view.findViewById(R.id.food_ln_food1);
             ln_info1 = (LinearLayout)view.findViewById(R.id.food_ln_info1);
@@ -80,9 +81,15 @@ public class AdapterGridViewAnGi extends BaseAdapter{
             tv_des1 = (TextView)view.findViewById(R.id.food_tv_des1);
         }
         //show dữ liệu lên grid view tab Ăn Gi
-        public void showNoiDung(food nhaHang){
+        public void showNoiDung(food nhaHang,restaurant res){
+
             food_name1.setText(nhaHang.getFood_Name());
 
+            if(res!=null)
+            {
+                tv_address1.setText(res.getAddress_Name());
+                rest_name1.setText(res.getRest_Name());
+            }
 
             if (nhaHang.getPicture()!= null) {
                 Glide.with(context).load(nhaHang.getAnh()).into(imv_info_1);
@@ -94,19 +101,38 @@ public class AdapterGridViewAnGi extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         Holder holder;
         food item=listNhaHang.get(position);
+        restaurant res;
+        res=getRes(item.getRes_ID());
+
         if(convertView==null){
             convertView=inflater.inflate(R.layout.layout_view_angi_nhahang, null);
             holder=new Holder(convertView);
             convertView.setTag(holder);
-        }else{
+        }
+        else{
             holder=(Holder) convertView.getTag();
         }
+
         holder=(Holder) convertView.getTag();
 
-        holder.showNoiDung(item);
-        //holder.onClickItem(item);
+        holder.showNoiDung(item,res);
 
         return convertView;
+    }
+
+    public  restaurant getRes(int resID)
+    {
+        restaurant res=null;
+        AsyncGetResFood asyncGetResFood = new AsyncGetResFood();
+        try {
+            res= asyncGetResFood.execute(resID).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return res;
+
     }
     public class ItemNhaHang implements  View.OnClickListener{
         food nhaHang;

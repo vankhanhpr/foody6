@@ -39,6 +39,8 @@ public class Fragment_Login_main extends Fragment implements View.OnClickListene
     LinearLayout tab_login;
     RelativeLayout tab_view_all_profile,tab_logout,setting_user;
 
+    boolean flag_login=false;
+
     user_member user;
     TextView tv_name_user;
     ImageView imv_user;
@@ -69,20 +71,35 @@ public class Fragment_Login_main extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v)
     {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.tab_login:
-                Intent intent = new Intent(getActivity(),Login.class);
-                startActivityForResult(intent,789);
+                if (flag_login == false) {
+                    Intent intent = new Intent(getActivity(), Login.class);
+                    startActivityForResult(intent, 789);
+                } else {
+                }
                 break;
             case R.id.tab_view_all_profile:
-                sendToProfile(kq,111);
+                if (flag_login == true) {
+                    sendToProfile(kq, 111);
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), Login.class);
+                    startActivityForResult(intent, 777);
+                }
                 break;
             case R.id.tab_logout:
                 logOut1();
                 break;
             case R.id.setting_user:
-                sendToSettingProfile(kq,222);
+                if (flag_login == true) {
+                    sendToSettingProfile(kq, 222);
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(), Login.class);
+                    startActivityForResult(intent, 888);
+                }
                 break;
         }
 
@@ -141,6 +158,7 @@ public class Fragment_Login_main extends Fragment implements View.OnClickListene
             Bundle bundle = data.getBundleExtra("TapTin");
             kq = bundle.getString("KetQua");
             loadUser(kq);
+            flag_login=true;
             tab_logout.setVisibility(View.VISIBLE);
 
         }
@@ -148,13 +166,35 @@ public class Fragment_Login_main extends Fragment implements View.OnClickListene
         {
             loadUser(kq);
         }
+        if(requestCode==777)
+        {
+            Bundle bundle = data.getBundleExtra("TapTin");
+            kq = bundle.getString("KetQua");
+            loadUser(kq);
+            flag_login=true;
+            tab_logout.setVisibility(View.VISIBLE);
+            sendToProfile(kq, 111);
+        }
+        if(requestCode==888)
+        {
+            Bundle bundle = data.getBundleExtra("TapTin");
+            kq = bundle.getString("KetQua");
+            loadUser(kq);
+            flag_login=true;
+            tab_logout.setVisibility(View.VISIBLE);
+            sendToSettingProfile(kq, 222);
+        }
+
+
+
     }
     //Khi nhấn logout
     public  void logOut()
     {
         tab_logout.setVisibility(View.GONE);
         tv_name_user.setText("Đăng nhâp");
-        imv_user.setBackgroundResource(R.drawable.ic_tab_profile);
+        imv_user.setImageResource(R.drawable.ic_tab_profile);
+        flag_login=false;
     }
 
     //hàm load thông tin tài khoản sau khi đăng nhập theo Email

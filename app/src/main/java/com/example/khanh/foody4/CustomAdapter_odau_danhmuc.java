@@ -10,12 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.khanh.foody4.bao.TestAdapter_restaurant;
-import com.example.khanh.foody4.get_set.quanan_getset;
-import com.example.khanh.foody4.customadapter.CustomAdapter_odau_nhahang;
-import com.example.khanh.foody4.customadapter.getdata;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +26,7 @@ public class CustomAdapter_odau_danhmuc extends BaseAdapter
     Activity mn;
     public  static  int vitri=0;
     public MainActivity mainActivity;
+    public static int positionselected=0;
 
     Context context;
     public CustomAdapter_odau_danhmuc (MainActivity mainActivity,List<String> prgmNameList, List<Integer> prgmImages)
@@ -63,10 +58,21 @@ public class CustomAdapter_odau_danhmuc extends BaseAdapter
         return position;
     }
 
+    @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
+    @Override
+    public int getItemViewType(int i) {
+        return i;
+    }
     public class Holder
     {
         TextView tv;
         ImageView img,imv_check_a;
+
+    }
+    public static void setIsselected(int posotion){
 
     }
     @Override
@@ -81,14 +87,27 @@ public class CustomAdapter_odau_danhmuc extends BaseAdapter
         holder.imv_check_a=(ImageView)rowView.findViewById(R.id.imv_check);
         holder.img.setImageResource(imageId.get(position));
 
-        if(position==vitri)
+        if(position==0)
         {
-            //holder.img.setColorFilter(context.getResources().getColor(R.color.blu_icon));
             holder.tv.setTextColor(context.getResources().getColor(R.color.red1));
             holder.imv_check_a.setImageResource(R.drawable.icon_check);
             holder.imv_check_a.setColorFilter(context.getResources().getColor(R.color.red1));
             holder.img.setVisibility(View.GONE);
+            holder.imv_check_a.setVisibility(View.VISIBLE);
         }
+
+        if(positionselected==position) {
+            holder.tv.setTextColor(context.getResources().getColor(R.color.red1));
+            holder.imv_check_a.setImageResource(R.drawable.icon_check);
+            holder.imv_check_a.setVisibility(View.VISIBLE);
+         }
+        else {
+            holder.imv_check_a.setImageResource(R.drawable.icon_check);
+            holder.tv.setTextColor(context.getResources().getColor(R.color.black_text));
+            holder.imv_check_a.setVisibility(View.GONE);
+        }
+
+
 
         /*rowView.setOnClickListener(new View.OnClickListener()
         {

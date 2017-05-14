@@ -108,7 +108,7 @@
                             android:minHeight="32.0dip"
                             android:padding="3.0dip"
                             android:singleLine="true"
-                            android:enabled="false"
+                            android:enabled="true"
                             android:textSize="13dip" />
                     </LinearLayout>
 

@@ -84,7 +84,7 @@ public class SettingProfile extends AppCompatActivity implements OnClickListener
     //Hàm gọi activity thay đổi ảnh đại diện và gửi thông tin là mail qua
     public  void sendToAvatar(String temp,int position )
     {
-        Intent intent = new Intent(this,SettingPass.class);
+        Intent intent = new Intent(this,SettingAvatar.class);
         Bundle bundle = new Bundle();
         bundle.putString("KetQua",temp);
         intent.putExtra("GoiTin", bundle);

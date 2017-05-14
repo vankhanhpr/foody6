@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,20 +24,17 @@ import android.widget.Toast;
 import com.example.khanh.foody4.asynctask.AsyncLoadDistrict;
 import com.example.khanh.foody4.asynctask.AsyncLoadFood;
 import com.example.khanh.foody4.asynctask.AsyncLoadImage;
+import com.example.khanh.foody4.asynctask.AsyncLoadRest;
 import com.example.khanh.foody4.asynctask.AsyncLoadStreet;
-import com.example.khanh.foody4.bao.TestAdapter_angi_monan;
-import com.example.khanh.foody4.bao.TestAdapter_district;
+
 import com.example.khanh.foody4.customadapter.AdapterGridViewAnGi;
-import com.example.khanh.foody4.customadapter.CustomAdapter_District;
-import com.example.khanh.foody4.customadapter.CustomAdapter_odau_nhahang;
 import com.example.khanh.foody4.customadapter.ExpandableListAdapterODau;
-import com.example.khanh.foody4.customadapter.NoDataAdapter;
-import com.example.khanh.foody4.get_set.connect_database_district;
+
 import com.example.khanh.foody4.get_set.district;
 import com.example.khanh.foody4.get_set.food;
 import com.example.khanh.foody4.get_set.monan_getset;
-import com.example.khanh.foody4.customadapter.CustomAdapter_angi_monan;
 import com.example.khanh.foody4.customadapter.getdata;
+import com.example.khanh.foody4.get_set.restaurant;
 import com.example.khanh.foody4.get_set.street;
 import com.example.khanh.foody4.myinterface.IChooseStreet;
 import com.example.khanh.foody4.select_city_district.Select_province;
@@ -71,10 +69,7 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
     List<String>arr_danhmuc;//Danh sách chuỗi trong tab danh mục
     List<Integer>image_moinhat1;//Danh sách chứa các icon phần mới nhất
     List<Integer>image_danhmuc;//Danh sách chứa các icon phần danh mục
-    TestAdapter_district distric;
     List<String>arr_district;
-    public  static ArrayAdapter arrayAdapterhuyen1;
-    public TestAdapter_angi_monan ta_monan;
     CustomAdapter CAMoinhat1;//Tạo custom để hiện ra phần text và phần icon của mới nhất
     CustomAdapter_angi_danhmuc CADanhmuc4;
     MainActivity mainActivity;
@@ -122,13 +117,13 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
     {
 
         //khởi tạo gọi các hàm lấy dữ liệu và đổ dữ liệu vào list lúc ban đầu
-        distric= new TestAdapter_district(context);//Khởi tạo một adapter để hiển thị listview quận và huyện
         View v =inflater.inflate(R.layout.tab_layout2,container,false);//Link sang layout để gọi các thuộc tính
         this.inflater=inflater;
         unit(v);//gọi hàm khởi tạo các giá trị
         setItem1(v);//Gọi hàm setItem
         load_District();
         load_Food();
+
         //bắt sự kiện khi nhấn vào nút mới nhất nó sẽ đóng tab chính và mở tav listview mới nhất
         tab_new.setOnClickListener(this);
         //bắt sự kiện khi nhấn vào nút danh mục nó sẽ đóng tab chính và mở tav listview danh mục
@@ -173,6 +168,24 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
 
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                street streetselected= expandableListAdapterODau.getChild(groupPosition,childPosition);
+                tv_listview_angi_thanhpho1.setText(streetselected.getStreet_Name());
+                tv_listview_angi_thanhpho1.setTextColor(context.getResources().getColor(R.color.red1));
+
+                tab_listview_angi_thanhpho.setVisibility(View.GONE);
+                tab_chinh1.setVisibility(View.VISIBLE);
+                button_huy_angi.setVisibility(View.GONE);
+                mainActivity.tab_button_nagi.setVisibility(View.VISIBLE);
+
+                tab_thanh_pho_angi1.setBackgroundResource(R.color.colorWhite);
+                flag_thanhpho=true;
+
+                getdata.setFood_City(0);
+                getdata.setFood_Disttrict(0);
+                getdata.setFood_Street(streetselected.getStreet_ID());
+                getdata.setFood_Catalory(0);
+                load_Food();
                 return false;
             }
         });
@@ -181,6 +194,30 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         lv_danhmuc.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {;
+
+
+                ImageView imvcheck,imvIm;
+                TextView textView;
+                for(int i=0;i<parent.getChildCount();i++)
+                {
+                    imvIm=(ImageView)parent.getChildAt(i).findViewById(R.id.imageView10);
+                    imvcheck=(ImageView)parent.getChildAt(i).findViewById(R.id.imv_check);
+                    textView=(TextView)parent.getChildAt(i).findViewById(R.id.textView10);
+
+                    imvcheck.setVisibility(View.GONE);
+                    textView.setTextColor(context.getResources().getColor(R.color.black_text));
+                    if(i==0)
+                    {
+                        imvIm.setVisibility(View.GONE);
+                    }
+                }
+                imvcheck=(ImageView)view.findViewById(R.id.imv_check);
+                imvcheck.setVisibility(View.VISIBLE);
+                textView=(TextView)view.findViewById(R.id.textView10);
+                textView.setTextColor(context.getResources().getColor(R.color.red1));
+                CustomAdapter_angi_danhmuc.vitri=position;
+
+
                 button_huy_angi.setVisibility(View.GONE);
 
                 tab_danh_muc_angi.setBackgroundResource(R.color.colorWhite);
@@ -508,9 +545,13 @@ public class angi extends Fragment implements View.OnClickListener,IChooseStreet
         lv_moinhat_angi_thanhpho.setAdapter(expandableListAdapterODau);
     }
 
+
+    //Load mon an theo nha hang
     public  void load_Food()
     {
         AsyncLoadFood asyncLoadFood = new AsyncLoadFood();
+        AsyncLoadRest asyncLoadRest= new AsyncLoadRest();
+
         try
         {
             listFood= asyncLoadFood.execute(getdata.getFood_City(),getdata.getFood_Disttrict(),getdata.getFood_Catalory(),getdata.getFood_Street()).get();

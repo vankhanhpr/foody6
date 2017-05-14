@@ -122,7 +122,7 @@
                                     android:layout_width="257px"
                                     android:layout_height="60px"
                                     android:id="@+id/textView_odau_thanhpho_hcm"
-                                    android:textSize="15sp"
+                                    android:textSize="13sp"
                                     android:gravity="center_horizontal"
                                     android:layout_marginTop="10px"
                                     android:text="TP.HCM">

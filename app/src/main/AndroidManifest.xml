@@ -22,18 +22,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Wellcom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity" />
         <activity android:name=".select_city_district.Select_province" />
         <activity android:name=".mainf" />
         <activity android:name=".login.Login" />
         <activity android:name=".login.Edit_Profile" />
         <activity android:name=".login.SettingProfile" />
+        <activity android:name=".login.SettingPass" />
+        <activity android:name=".login.SettingAvatar" />
+        <activity android:name=".insert_restaurant.Select_Restaurant" />
         <activity android:name=".insert_restaurant.Insert_Restaurant" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

@@ -9,12 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.khanh.foody4.bao.TestAdapter_angi_monan;
-import com.example.khanh.foody4.get_set.monan_getset;
-import com.example.khanh.foody4.customadapter.CustomAdapter_angi_monan;
-import com.example.khanh.foody4.customadapter.getdata;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +24,7 @@ public class CustomAdapter_angi_danhmuc extends BaseAdapter
     private static LayoutInflater inflater=null;
     MainActivity mn;
 
-    int vitri =0;
+      public static  int vitri =0;
 
     //hàm này gọi hàm trộn các đối tượng trong textview(imageView và textView) và đổ vào listview
     public CustomAdapter_angi_danhmuc (MainActivity mainActivity,List<String> prgmNameList, List<Integer> prgmImages)
@@ -83,95 +77,22 @@ public class CustomAdapter_angi_danhmuc extends BaseAdapter
         holder.tv.setText(result.get(position));
         holder.img.setImageResource(imageId.get(position));
 
-        if(position==vitri)
+        if(position==0)
         {
-            //holder.img.setColorFilter(context.getResources().getColor(R.color.blu_icon));
+            holder.img.setVisibility(View.GONE);
+        }
+        if(vitri==position)
+        {
             holder.tv.setTextColor(context.getResources().getColor(R.color.red1));
             holder.imv_check_a.setImageResource(R.drawable.icon_check);
-            holder.img.setVisibility(View.GONE);
             holder.imv_check_a.setColorFilter(context.getResources().getColor(R.color.red1));
         }
-//Xử lí kích vào một dòng trong list
-        /*rowView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                TextView tv1;
-                ImageView imv_check1;
-                LinearLayout tab_liner;
-                LinearLayout tab_chinh_angi;
-                // TODO Auto-generated method stub
-                *//*Toast.makeText(context, "You Clicked "+result.get(position), Toast.LENGTH_LONG).show();*//*
-                *//*holderimv_check=(ImageView)v.findViewById(R.id.imv_check);.*//*
+        else {
+            holder.imv_check_a.setImageResource(R.drawable.icon_check);
+            holder.tv.setTextColor(context.getResources().getColor(R.color.black_text));
+            holder.imv_check_a.setVisibility(View.GONE);
+        }
 
-                for(int i=0;i<parent.getChildCount();i++)
-                {
-                    tv1=(TextView)parent.getChildAt(i).findViewById(R.id.textView10);
-                    //img1=(ImageView)parent.getChildAt(i).findViewById(R.id.imageView10);
-                    imv_check1=(ImageView)parent.getChildAt(i).findViewById(R.id.imv_check);
-
-                    tv1.setTextColor(context.getResources().getColor(R.color.black_icon));
-                    //img1.setColorFilter(null);
-                    imv_check1.setImageResource(0);
-                }
-                vitri=position;
-                tv1=(TextView)v.findViewById(R.id.textView10);
-                //img1=(ImageView)v.findViewById(R.id.imageView10);
-                imv_check1=(ImageView)v.findViewById(R.id.imv_check);
-                tv1.setTextColor(context.getResources().getColor(R.color.red1));
-                //img1.setColorFilter(context.getResources().getColor(R.color.blu_icon));
-                imv_check1.setImageResource(R.drawable.icon_check);
-                imv_check1.setColorFilter(context.getResources().getColor(R.color.red1));
-
-                //chọn vtri 0 thì có màu nâu vị trí khác thì là màu đỏ
-                if(position==0)
-                {
-                    angi.tv_angi_danhmuc.setTextColor(context.getResources().getColor(R.color.colortab));
-                }
-                else
-                    angi.tv_angi_danhmuc.setTextColor(context.getResources().getColor(R.color.red1));
-
-
-                //hiện icon text màu text cho giống giao diện
-                TextView tv_angi_danhmuc;
-                tv_angi_danhmuc=(TextView)mn.findViewById(R.id.tv_angi_danhmuc);
-                tv_angi_danhmuc.setText(tv1.getText());
-                if(position==0)
-                    tv_angi_danhmuc.setTextColor(context.getResources().getColor(R.color.colortab));
-                else
-                    tv_angi_danhmuc.setTextColor(context.getResources().getColor(R.color.red1));
-
-                tab_liner=(LinearLayout)mn.findViewById(R.id.tab_listview_angi_danhmuc);
-                tab_chinh_angi=(LinearLayout) mn.findViewById(R.id.tab_chinh1);
-                tab_liner.setVisibility(v.GONE);
-                tab_chinh_angi.setVisibility(v.VISIBLE);
-                mn.tab_button_nagi.setVisibility(View.VISIBLE);
-                angi.button_huy_angi.setVisibility(View.GONE);
-
-                angi.tab_danh_muc_angi.setBackgroundResource(R.color.colorWhite);
-
-                angi.flag_danhmuc=true;
-
-                //đỏ lại danh sách nhà hàng theo danh mục
-
-            }
-            //hàm lấy ds đói tượng món ăn /nhà hàng
-         *//*   public  void  getMonAn()
-            {
-                listMonAn=new ArrayList<>();
-                ta_monan=new TestAdapter_angi_monan(context);
-                listMonAn=ta_monan.getListMonAn(getdata.getAngi_danhmuc(),getdata.getAngi_huyen(),getdata.getAngi_tinh());
-            }
-            //Bây giờ gọi lớp adapter đổ vào listview
-            public void LayMonAn()
-            {
-                CustomAdapter_angi_monan csmonan1 = new CustomAdapter_angi_monan(angi.inflater,mn,listMonAn);
-                angi.lv_angi_nhahang.setAdapter(csmonan1);
-            }*//*
-
-
-        });*/
         return rowView;
     }
 }
