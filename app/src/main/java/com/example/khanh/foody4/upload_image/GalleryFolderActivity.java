@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -23,12 +21,13 @@ import java.util.ArrayList;
  * Created by Khanh on 5/16/2017.
  */
 
-public class Change_Avatar extends AppCompatActivity implements View.OnClickListener,GridView.OnItemClickListener{
+public class GalleryFolderActivity extends AppCompatActivity implements View.OnClickListener, GridView.OnItemClickListener {
+
     public static final int SINGLE_SELECT = 0;
     public static final int MULTI_SELECT = 1;
     static String TAG;
     static {
-        TAG = Change_Avatar.class.getSimpleName();
+        TAG = GalleryFolderActivity.class.getSimpleName();
     }
     LinearLayout back_button_gallery;
     TextView text_view_done;
@@ -49,8 +48,7 @@ public class Change_Avatar extends AppCompatActivity implements View.OnClickList
         initEvent();
 
         imageGalleyList = getData();
-        Log.d("kahnh",""+imageGalleyList.size());
-        adapter = new GalleryFolderAdapter(getApplicationContext(),imageGalleyList);
+        adapter = new GalleryFolderAdapter(this.getApplicationContext(), imageGalleyList);
         grid_view_folder.setAdapter(adapter);
         grid_view_folder.setOnItemClickListener(this);
     }
@@ -112,10 +110,7 @@ public class Change_Avatar extends AppCompatActivity implements View.OnClickList
         }
         return list;
     }
-
     ArrayList<ImageGalleryBean> imageGalleryBeen;
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

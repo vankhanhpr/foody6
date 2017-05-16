@@ -41,6 +41,8 @@
         <activity android:name=".upload_image.Change_Avatar" />
         <activity android:name=".insert_restaurant.Select_Restaurant" />
         <activity android:name=".insert_restaurant.Insert_Restaurant" />
+        <activity android:name=".upload_image.GalleryFileActivity" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
