@@ -27,9 +27,9 @@ public class CustomAdapter_District extends BaseAdapter
     Context context;
     List<district> listDistricts;
     private static LayoutInflater inflater=null;
-    public CustomAdapter_District(MainActivity mainActivity, List<district>listDistricts)
+    public CustomAdapter_District(Context context, List<district>listDistricts)
     {
-        context=mainActivity;
+        context=context;
         this.listDistricts=listDistricts;
 
         inflater = ( LayoutInflater )context.
@@ -52,12 +52,11 @@ public class CustomAdapter_District extends BaseAdapter
     }
     public  class  Holder
     {
-        TextView tv_view_district,tv_view_street;
+        TextView tv_view_dt;
         ImageView imv_tv_check;
         public Holder(View view)
         {
-            tv_view_district=(TextView)view.findViewById(R.id.tv_view_district);
-            tv_view_street=(TextView)view.findViewById(R.id.tv_view_street);
+            tv_view_dt=(TextView)view.findViewById(R.id.tv_view_dt);
             imv_tv_check=(ImageView)view.findViewById(R.id.imv_lv_select_city);
         }
     }
@@ -66,7 +65,7 @@ public class CustomAdapter_District extends BaseAdapter
         CustomAdapter_District.Holder holder;
         if(view==null)
         {
-            view=inflater.inflate(R.layout.tab_texview_lv_district, null);
+            view=inflater.inflate(R.layout.layout_textview_lv_changedistrict, null);
             holder=new CustomAdapter_District.Holder(view);
             view.setTag(holder);
         }
@@ -75,8 +74,7 @@ public class CustomAdapter_District extends BaseAdapter
             holder=(CustomAdapter_District.Holder) view.getTag();
         }
         holder=(CustomAdapter_District.Holder) view.getTag();
-        holder.tv_view_district.setText(listDistricts.get(i).getDistrict_Name());
-        holder.tv_view_street.setText(listDistricts.get(i).getTotal_Street()+" đường");
+        holder.tv_view_dt.setText(listDistricts.get(i).getDistrict_Name());
         return view;
     }
 

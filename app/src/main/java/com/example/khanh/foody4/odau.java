@@ -736,7 +736,7 @@ public class odau extends Fragment implements View.OnClickListener,IChooseStreet
         image_danhmuc.add(R.drawable.monan_quocte);
         //Khởi tạo hàm CustomAdapter_odau_danhmuc
         //Hàm này sẽ trộn image với text để đổ vào trong listView
-        CADanhmuc =new CustomAdapter_odau_danhmuc(mainActivity,arr_danhmuc,image_danhmuc);
+        CADanhmuc =new CustomAdapter_odau_danhmuc(context,arr_danhmuc,image_danhmuc);
 
     }
     //Hàm lấy ra danh sách đối tượng nhà hàng

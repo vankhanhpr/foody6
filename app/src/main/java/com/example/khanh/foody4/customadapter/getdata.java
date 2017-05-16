@@ -7,9 +7,6 @@ package com.example.khanh.foody4.customadapter;
 public class getdata
 {
 
-
-
-
     static  Integer city_ID=1;
 
     public  static  int res_City=1;
@@ -23,6 +20,33 @@ public class getdata
     public  static  int food_Catalory=1;
 
     public static int choose_city=1;
+    public static  int choose_district;
+    public  static  String choose_catalogyName="";
+    public  static  int choose_catalogy;
+
+    public static String getChoose_catalogyName() {
+        return choose_catalogyName;
+    }
+
+    public static void setChoose_catalogyName(String choose_catalogyName) {
+        getdata.choose_catalogyName = choose_catalogyName;
+    }
+
+    public static int getChoose_catalogy() {
+        return choose_catalogy;
+    }
+
+    public static void setChoose_catalogy(int choose_catalogy) {
+        getdata.choose_catalogy = choose_catalogy;
+    }
+
+    public static int getChoose_district() {
+        return choose_district;
+    }
+
+    public static void setChoose_district(int choose_district) {
+        getdata.choose_district = choose_district;
+    }
 
     public static int getChoose_city() {
         return choose_city;

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.khanh.foody4.R;
+import com.example.khanh.foody4.upload_image.Change_Avatar;
 
 /**
  * Created by Khanh on 5/10/2017.
@@ -37,7 +38,8 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.linear_layout_change_avatar:
-
+                Intent intent = new Intent(this, Change_Avatar.class);
+                startActivityForResult(intent, 999);
                 break;
         }
 

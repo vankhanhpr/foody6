@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="10.0dip"
+    android:paddingLeft="8.0dip"
+    android:weightSum="13"
+    android:background="@color/Gray2"
+    android:paddingRight="8.0dip"
+    android:paddingTop="10.0dip">
+
+    <TextView
+        android:layout_weight="12"
+        android:id="@+id/tv_view_dt"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="TP.HCM"
+        android:textColor="@color/black_text"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imv_tv_check"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:background="@drawable/icon_arrow_right"
+        android:layout_weight="1"/>
+</LinearLayout>

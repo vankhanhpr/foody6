@@ -38,6 +38,7 @@
         <activity android:name=".login.SettingProfile" />
         <activity android:name=".login.SettingPass" />
         <activity android:name=".login.SettingAvatar" />
+        <activity android:name=".upload_image.Change_Avatar" />
         <activity android:name=".insert_restaurant.Select_Restaurant" />
         <activity android:name=".insert_restaurant.Insert_Restaurant" />
         <!--

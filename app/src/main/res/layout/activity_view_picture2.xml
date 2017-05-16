@@ -31,12 +31,5 @@
             android:textColor="@color/colorWhite"
             android:textSize="14dip" />
 
-        <!--<TextView-->
-        <!--android:id="@+id/text_view_num_of_file"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:includeFontPadding="false"-->
-        <!--android:textColor="#ff909090"-->
-        <!--android:textSize="12dip" />-->
     </LinearLayout>
 </FrameLayout>
