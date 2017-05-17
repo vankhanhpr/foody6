@@ -1,5 +1,7 @@
 package com.example.khanh.foody4.customadapter;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by Khanh on 4/2/2017.
  */
@@ -23,6 +25,21 @@ public class getdata
     public static  int choose_district;
     public  static  String choose_catalogyName="";
     public  static  int choose_catalogy;
+    public  static  String email="";
+
+
+    public static final LatLng getDefaultMyLocation(){
+        return new LatLng(10.851035, 106.772001);//
+    }
+
+
+    public static String getEmail() {
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        getdata.email = email;
+    }
 
     public static String getChoose_catalogyName() {
         return choose_catalogyName;

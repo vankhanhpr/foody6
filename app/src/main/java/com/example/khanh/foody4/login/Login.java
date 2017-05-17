@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.khanh.foody4.R;
 import com.example.khanh.foody4.asynctask.AsyncCheckLogin;
+import com.example.khanh.foody4.customadapter.getdata;
 
 import java.util.concurrent.ExecutionException;
 
@@ -83,6 +84,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener
 
                 if(temp==1) {
                     Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    getdata.setEmail(user);
                     sendToMain(user,789);
                     sendToMain(user,777);
                     sendToMain(user,888);

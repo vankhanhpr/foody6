@@ -75,7 +75,7 @@ public class Insert_Restaurant extends AppCompatActivity implements View.OnClick
         {
             case R.id.linear_layout_map_location:
                 Intent intentMap = new Intent(this,MapsActivity.class);
-                startActivityForResult(intentMap,555);
+                startActivity(intentMap);
                 break;
             case R.id.tab_back_place:
                 finish();

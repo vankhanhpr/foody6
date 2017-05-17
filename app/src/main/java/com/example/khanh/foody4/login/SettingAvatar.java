@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.khanh.foody4.R;
@@ -37,13 +38,13 @@ import static com.example.khanh.foody4.R.id.profile_image;
  * Created by Khanh on 5/10/2017.
  */
 
-public class SettingAvatar extends AppCompatActivity implements View.OnClickListener
-{
+public class SettingAvatar extends AppCompatActivity implements View.OnClickListener {
     ImageGalleryBean uploadAvatar = null;
     ImageGalleryBean uploadCover = null;
     String email;
     LinearLayout linear_layout_change_avatar;
     TextView text_view_save_change;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +53,8 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
         Bundle bundle = intent.getBundleExtra("GoiTin");
         email = bundle.getString("KetQua");
 
-        linear_layout_change_avatar=(LinearLayout)findViewById(R.id.linear_layout_change_avatar);
-        text_view_save_change=(TextView)findViewById(R.id.text_view_save_change);
+        linear_layout_change_avatar = (LinearLayout) findViewById(R.id.linear_layout_change_avatar);
+        text_view_save_change = (TextView) findViewById(R.id.text_view_save_change);
 
         linear_layout_change_avatar.setOnClickListener(this);
         text_view_save_change.setOnClickListener(this);
@@ -63,23 +64,21 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.linear_layout_change_avatar:
-                /*Intent intent = new Intent(this, Change_Avatar.class);
-                startActivityForResult(intent, 999);*/
 
                 showPopup(v);
-
                 break;
             case R.id.text_view_save_change:
                 uploadAvatar(uploadAvatar);
+                Toast.makeText(this, "Cập nhật ảnh thành công", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
 
     }
-    private void showPopup(View v)
-    {
+
+    private void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.getMenuInflater().inflate(R.menu.select_photo_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(onMenuItemClickListener);
@@ -91,10 +90,10 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.select_from_gallery:
-                    if(PermissionUtil.isReadWritePermission(SettingAvatar.this.getApplicationContext())){
-                        Intent intent=new Intent(SettingAvatar.this, Change_Avatar.class);
-                        intent.putExtra("mode",Change_Avatar.SINGLE_SELECT);
-                        startActivityForResult(intent,17);
+                    if (PermissionUtil.isReadWritePermission(SettingAvatar.this.getApplicationContext())) {
+                        Intent intent = new Intent(SettingAvatar.this, Change_Avatar.class);
+                        intent.putExtra("mode", Change_Avatar.SINGLE_SELECT);
+                        startActivityForResult(intent, 17);
                         return true;
                     }
                     PermissionUtil.marshmallowReadWritePermissionCheck(SettingAvatar.this);
@@ -115,8 +114,9 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
             if (resultCode == Activity.RESULT_OK) {
                 ArrayList<ImageGalleryBean> dataReponse = new ArrayList<>();
                 dataReponse = data.getParcelableArrayListExtra("images");
-                if(dataReponse!=null && dataReponse.size()>0){
-                    updateImageView(dataReponse.get(0));
+                if (dataReponse != null && dataReponse.size() > 0) {
+                    uploadAvatar = dataReponse.get(0);
+                    /// updateImageView(dataReponse.get(0));
                 }
             }
         }
@@ -125,10 +125,9 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
     //Thay đổi hình ảnh
     boolean changeavatar = false;
     boolean changecover = false;
-    public void updateImageView(ImageGalleryBean image) 
-    {
-        if (this.changeavatar) 
-        {
+
+    public void updateImageView(ImageGalleryBean image) {
+        if (this.changeavatar) {
             this.changeavatar = false;
             this.uploadAvatar = image;
             //Glide.with(this.getApplicationContext()).load("file://" + uploadAvatar.getPath()).into(profile_image);
@@ -140,32 +139,35 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void uploadAvatar(ImageGalleryBean uploadAvatar){
+    public void uploadAvatar(ImageGalleryBean uploadAvatar) {
 
-        JsonObject input= StaticObjectJSON.createImageInputObject(uploadAvatar.getPath());
-        AsynChangeAvatar asynChangeAvatar=new AsynChangeAvatar(input);
+
+        JsonObject input = StaticObjectJSON.createImageInputObject(uploadAvatar.getPath());
+        AsynChangeAvatar asynChangeAvatar = new AsynChangeAvatar(input);
         try {
-            JsonObject object= asynChangeAvatar.execute().get();
+            JsonObject object = asynChangeAvatar.execute().get();
             //Log.d("hạhfds",object.toString());
 
-            String bool=object.get("success").toString();
-            Boolean f=Boolean.parseBoolean(bool);
-
-            if(f){
+            String bool = object.get("success").toString();
+            Boolean f = Boolean.parseBoolean(bool);
+            Log.d("TASFDSADSA", object.toString());
+           /* if (f) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingAvatar.this);
                 builder.setMessage("Thay đổi avatar thành công!");
-                /*builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    *//*public void onClick(DialogInterface dialog, int id) {
-                        //do things
-                        AsyncLoadUser usern=new AsyncLoadUser();
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                   *//* public void onClick(DialogInterface dialog, int id) {
+                        *//**//*//**//*//*do things
+                        AsyncLoadUser usern = new AsyncLoadUser();
                         try {
-                            user_member user1=usern.execute(StaticData.getObjectInfoUser().getUser_Name()).get();
-                            AsynGetImage asynGetImage=new AsynGetImage();
-                            String stringImage=asynGetImage.execute(user1.getAvatar()).get();
+                            user_member user1 = usern.execute(StaticData.getObjectInfoUser().getUser_Name()).get();
+                            AsynGetImage asynGetImage = new AsynGetImage();
+                            String stringImage = asynGetImage.execute(user1.getAvatar()).get();
                             byte[] valueDecoded = Base64.decode(stringImage);
-                            if(valueDecoded!=null)
+                            if (valueDecoded != null)
                                 user1.setHinh(valueDecoded);
-                            if(user1!=null)
+                            if (user1 != null)
                                 StaticData.setObjectInfoUser(user1);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -175,11 +177,12 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
                         Intent returnIntent = new Intent();
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
-                    }*//*
-                });*/
-                AlertDialog alert = builder.create();
-                alert.show();
-            }else{
+                    }
+                }*//**//*);*//*
+
+               // AlertDialog alert = builder.create();
+               // alert.show();
+            } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingAvatar.this);
                 builder.setMessage("Thay đổi avatar thất bại!");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -189,7 +192,7 @@ public class SettingAvatar extends AppCompatActivity implements View.OnClickList
                 });
                 AlertDialog alert = builder.create();
                 alert.show();
-            }
+            }*/
 
         } catch (InterruptedException e) {
             e.printStackTrace();
